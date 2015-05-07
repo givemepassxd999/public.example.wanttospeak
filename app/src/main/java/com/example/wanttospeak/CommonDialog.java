@@ -9,7 +9,7 @@ import android.widget.LinearLayout;
 
 import com.example.givemepass.wanttospeak.R;
 
-public class CommonDialog extends Dialog {
+public abstract class CommonDialog extends Dialog {
 
     private Context mContext;
 
