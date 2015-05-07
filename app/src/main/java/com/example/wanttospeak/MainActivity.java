@@ -1,4 +1,4 @@
-package com.example.givemepass.wanttospeak;
+package com.example.wanttospeak;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -10,7 +10,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import com.androidquery.AQuery;
-import com.example.wanttospeak.CommonDialog;
+import com.example.givemepass.wanttospeak.R;
+import com.example.wanttospeak.Dialog.CommonDialog;
+import com.example.wanttospeak.Dialog.DataDialog;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -32,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         aq.id(R.id.add_item).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new CommonDialog(mContext).show();
+                new DataDialog(mContext).show();
             }
         });
     }

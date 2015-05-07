@@ -4,9 +4,9 @@
     android:layout_height="match_parent"
     >
     <RelativeLayout
+        android:id="@+id/navi_bar"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:id="@+id/navi_bar"
         android:background="#6bd7af"
         >
         <View
@@ -17,15 +17,11 @@
             android:layout_marginLeft="10dp"
             android:background="@drawable/navi_icon_back"
             />
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:background="#d7d7d7"
-            android:layout_alignParentBottom="true"/>
     </RelativeLayout>
+
     <LinearLayout
-        android:layout_below="@id/navi_bar"
         android:id="@+id/dialog_layout"
+        android:layout_below="@id/navi_bar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
