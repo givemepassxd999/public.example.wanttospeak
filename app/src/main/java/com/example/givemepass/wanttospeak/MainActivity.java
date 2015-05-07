@@ -1,5 +1,6 @@
 package com.example.givemepass.wanttospeak;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
@@ -9,23 +10,33 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import com.androidquery.AQuery;
+import com.example.wanttospeak.CommonDialog;
 
 
 public class MainActivity extends ActionBarActivity {
     private AQuery aq;
     private DrawerLayout mDrawerLayout;
 
+    private View mAddNewItem;
+    private Context mContext;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        mContext = this.getApplicationContext();
         aq = new AQuery(this);
         initView();
     }
 
     private void initView() {
         setupDrawer();
+        mAddNewItem = findViewById(R.id.add_item);
+        mAddNewItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new CommonDialog(MainActivity.this).show();
+            }
+        });
     }
 
     private void setupDrawer(){

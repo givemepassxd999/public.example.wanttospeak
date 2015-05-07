@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="C:\Users\givemepass\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\22.1.1\support-annotations-22.1.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="01d051a6bfb1218b1db2d3a5af0480ac2c25c42a">
+        <dex dex="C:\Users\givemepass\AndroidStudioProjects\wanttospeak\app\build\intermediates\pre-dexed\debug\support-annotations-22.1.1-cd81235b597d2f8b1ab92d5bec035a6d090ed0d1.jar" />
+    </item>
+    <item
+        jar="C:\Users\givemepass\AndroidStudioProjects\wanttospeak\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.1.1\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="c95ba8152923e4872e86a82cfcba9a51c0214328">
+        <dex dex="C:\Users\givemepass\AndroidStudioProjects\wanttospeak\app\build\intermediates\pre-dexed\debug\classes-e18991fd7bf81fd23f3d19e9caf7261a04f6d5b5.jar" />
+    </item>
+    <item
+        jar="C:\Users\givemepass\AndroidStudioProjects\wanttospeak\app\libs\android-query.0.26.8.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="46f90950a400a789fad7fc2cd8fb7a986637b2bf">
+        <dex dex="C:\Users\givemepass\AndroidStudioProjects\wanttospeak\app\build\intermediates\pre-dexed\debug\android-query.0.26.8-d6172b0d6285436d5e7e95c6799cae7795686eb0.jar" />
+    </item>
+    <item
+        jar="C:\Users\givemepass\AndroidStudioProjects\wanttospeak\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.1.1\libs\internal_impl-22.1.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="9e070ad32b2700b0343e8e0cccc437733d91ba3a">
+        <dex dex="C:\Users\givemepass\AndroidStudioProjects\wanttospeak\app\build\intermediates\pre-dexed\debug\internal_impl-22.1.1-90a58918b363ef1bb455a524d6834382ac17d9bb.jar" />
+    </item>
+    <item
+        jar="C:\Users\givemepass\AndroidStudioProjects\wanttospeak\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.1.1\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="a3ff3c506644c820eb2bdf06e8339f72be578551">
+        <dex dex="C:\Users\givemepass\AndroidStudioProjects\wanttospeak\app\build\intermediates\pre-dexed\debug\classes-bec497126addebce3f18c0b780a030922d47eb0a.jar" />
+    </item>
+
+</items>

@@ -2,4 +2,8 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="android:windowNoTitle">true</item>
     </style>
+    <style name="dialog_animation">
+        <item name="android:windowEnterAnimation">@anim/anim_activity_slide_in_right</item>
+        <item name="android:windowExitAnimation">@anim/anim_activity_slide_out_right</item>
+    </style>
 </resources>
