@@ -8,34 +8,42 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
+import com.androidquery.AQuery;
+
 
 public class MainActivity extends ActionBarActivity {
-
+    private AQuery aq;
     private DrawerLayout mDrawerLayout;
-    private View mNaviSwitchDrawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        aq = new AQuery(this);
         initView();
     }
 
-    private void initView(){
+    private void initView() {
+        setupDrawer();
+    }
+
+    private void setupDrawer(){
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mNaviSwitchDrawer = findViewById(R.id.drawer_switch);
-        mNaviSwitchDrawer.setOnClickListener(new View.OnClickListener() {
+        aq.id(R.id.drawer_switch).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(isSideMenuOpen()){
+                if (isSideMenuOpen()) {
                     mDrawerLayout.closeDrawer(Gravity.LEFT);
+                }else {
+                    mDrawerLayout.openDrawer(aq.id(R.id.left_drawer).getView());
                 }
             }
         });
     }
 
     public boolean isSideMenuOpen(){
-        return mDrawerLayout.isDrawerOpen(Gravity.LEFT);
+        return mDrawerLayout.isDrawerOpen(aq.id(R.id.left_drawer).getView());
     }
 
     private class MyGridAdapter extends BaseAdapter{
