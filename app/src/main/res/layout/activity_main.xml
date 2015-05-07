@@ -29,6 +29,7 @@
                 android:layout_alignParentBottom="true"
                 />
             <View
+                android:id="@+id/add_item"
                 android:layout_height="32dp"
                 android:layout_width="32dp"
                 android:layout_marginRight="10dp"
