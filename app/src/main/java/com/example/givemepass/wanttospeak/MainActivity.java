@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public boolean isSideMenuOpen(){
+    private boolean isSideMenuOpen(){
         return mDrawerLayout.isDrawerOpen(aq.id(R.id.left_drawer).getView());
     }
 

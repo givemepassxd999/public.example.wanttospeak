@@ -15,11 +15,11 @@
         >
 
         <RelativeLayout
-            android:background="#ffffff"
-            android:layout_alignParentTop="true"
-            android:layout_width="match_parent"
             android:id="@+id/main_action_bar"
             android:layout_height="50dp"
+            android:layout_width="match_parent"
+            android:background="#FFBBDD"
+            android:layout_alignParentTop="true"
             >
 
             <View

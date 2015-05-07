@@ -21,6 +21,7 @@ public class CommonDialog extends Dialog {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().getAttributes().windowAnimations = R.style.dialog_animation;
         setContentView(R.layout.dialog_layout);
+
         back = (View) findViewById(R.id.navi_back);
         back.setOnClickListener(new View.OnClickListener() {
 

@@ -5,16 +5,16 @@
     >
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:id="@+id/navi_bar"
         android:background="#6bd7af"
         >
         <View
+            android:id="@+id/navi_back"
             android:layout_centerVertical="true"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginLeft="10dp"
-            android:id="@+id/navi_back"
             android:background="@drawable/navi_icon_back"
             />
         <View
