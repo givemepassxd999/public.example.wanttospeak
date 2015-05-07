@@ -3,7 +3,7 @@ package com.example.givemepass.wanttospeak;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,28 +13,26 @@ import com.androidquery.AQuery;
 import com.example.wanttospeak.CommonDialog;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends AppCompatActivity {
     private AQuery aq;
     private DrawerLayout mDrawerLayout;
-
-    private View mAddNewItem;
     private Context mContext;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mContext = this.getApplicationContext();
+        mContext = this;
         aq = new AQuery(this);
         initView();
     }
 
     private void initView() {
         setupDrawer();
-        mAddNewItem = findViewById(R.id.add_item);
-        mAddNewItem.setOnClickListener(new View.OnClickListener() {
+        aq.id(R.id.add_item).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new CommonDialog(MainActivity.this).show();
+                new CommonDialog(mContext).show();
             }
         });
     }
@@ -45,7 +43,7 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onClick(View view) {
                 if (isSideMenuOpen()) {
-                    mDrawerLayout.closeDrawer(Gravity.LEFT);
+                    mDrawerLayout.closeDrawer(Gravity.START);
                 }else {
                     mDrawerLayout.openDrawer(aq.id(R.id.left_drawer).getView());
                 }
