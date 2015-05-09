@@ -69,7 +69,7 @@ public class SlideMenuView extends RelativeLayout {
             @Override
             public void onClick(View view) {
                 MemberTabDialog mMemberTabDialog = new MemberTabDialog(mContext);
-                mMemberTabDialog.setIndicator(1);
+                mMemberTabDialog.changedTab(1);
                 mMemberTabDialog.show();
             }
         });

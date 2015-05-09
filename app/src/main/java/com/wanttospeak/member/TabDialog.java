@@ -112,8 +112,15 @@ public abstract class TabDialog extends CommonDialog{
 		});
 		setIndicator(0);
 	}
-	
-	public void setIndicator(int pos){
+
+	public void changedTab(int pos){
+		currentTabIndex = pos;
+		setTabStatus();
+		setIndicator(pos);
+		mPager.setCurrentItem(pos);
+	}
+
+	private void setIndicator(int pos){
 		for(int i = 0; i < mTabViews.size(); i++) {
 			View indicator = mTabViews.get(i).findViewById(R.id.view_indicator);
 

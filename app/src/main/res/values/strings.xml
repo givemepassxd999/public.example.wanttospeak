@@ -7,4 +7,6 @@
     <string name="slide_menu_settings">設定</string>
     <string name="slide_menu_member_add">新增成員</string>
     <string name="slide_menu_member_remove">刪除成員</string>
+    <string name="ok">確定</string>
+    <string name="add_member_name">請輸入名字</string>
 </resources>
