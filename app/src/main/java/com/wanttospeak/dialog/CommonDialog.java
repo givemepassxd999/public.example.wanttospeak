@@ -1,4 +1,4 @@
-package com.example.wanttospeak.Dialog;
+package com.wanttospeak.dialog;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -11,7 +11,7 @@ import com.example.givemepass.wanttospeak.R;
 public abstract class CommonDialog extends Dialog {
     private Context mContext;
 
-	public CommonDialog(Context context) {
+    public CommonDialog(Context context) {
         super(context, android.R.style.Theme_Light);
         mContext = context;
         requestWindowFeature(Window.FEATURE_NO_TITLE);

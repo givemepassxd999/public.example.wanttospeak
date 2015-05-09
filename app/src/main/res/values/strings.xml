@@ -1,7 +1,10 @@
 <resources>
-    <string name="app_name">wanttospeak</string>
+    <string name="app_name">我有話要說</string>
     <string name="title_activity_main">MainActivity</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="slide_menu_settings">設定</string>
+    <string name="slide_menu_member_add">新增成員</string>
+    <string name="slide_menu_member_remove">刪除成員</string>
 </resources>

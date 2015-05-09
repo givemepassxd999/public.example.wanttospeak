@@ -1,4 +1,4 @@
-package com.example.wanttospeak;
+package com.wanttospeak.main;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -8,35 +8,43 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
 
 import com.androidquery.AQuery;
 import com.example.givemepass.wanttospeak.R;
-import com.example.wanttospeak.Dialog.CommonDialog;
-import com.example.wanttospeak.Dialog.DataDialog;
+import com.wanttospeak.dialog.DataDialog;
+import com.wanttospeak.slidemenu.SlideMenuView;
 
 
 public class MainActivity extends AppCompatActivity {
     private AQuery aq;
     private DrawerLayout mDrawerLayout;
+    private LinearLayout mSlideContainer;
     private Context mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mContext = this;
         aq = new AQuery(this);
+        mContext = this;
         initView();
     }
 
     private void initView() {
         setupDrawer();
+
         aq.id(R.id.add_item).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 new DataDialog(mContext).show();
             }
         });
+
+        mSlideContainer = (LinearLayout)aq.id(R.id.slidemenu_container).getView();
+        mSlideContainer.addView(new SlideMenuView(this),
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT);
     }
 
     private void setupDrawer(){
@@ -47,14 +55,14 @@ public class MainActivity extends AppCompatActivity {
                 if (isSideMenuOpen()) {
                     mDrawerLayout.closeDrawer(Gravity.START);
                 }else {
-                    mDrawerLayout.openDrawer(aq.id(R.id.left_drawer).getView());
+                    mDrawerLayout.openDrawer(mSlideContainer);
                 }
             }
         });
     }
 
     private boolean isSideMenuOpen(){
-        return mDrawerLayout.isDrawerOpen(aq.id(R.id.left_drawer).getView());
+        return mDrawerLayout.isDrawerOpen(mSlideContainer);
     }
 
     private class MyGridAdapter extends BaseAdapter{
