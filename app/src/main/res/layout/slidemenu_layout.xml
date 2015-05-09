@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="240dp"
     android:orientation="vertical"
     android:layout_height="match_parent">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="160dp"
         android:id="@+id/slidemenu_top"
-        android:background="#FFBBDD">
+        android:background="@color/actionbar_color">
         <ImageView
             android:layout_centerInParent="true"
             android:layout_width="64dp"
@@ -22,7 +22,7 @@
     </RelativeLayout>
     <ListView
         android:layout_below="@id/slidemenu_top"
-        android:id="@+id/left_drawer"
+        android:id="@+id/slidemenu_listview"
         android:layout_width="240dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
@@ -34,6 +34,9 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:clickable="true"
+        android:id="@+id/slidemenu_settings_layout"
+        android:background="@drawable/selector_slidemenu_settings"
         android:layout_alignParentBottom="true">
         <View
             android:layout_alignParentTop="true"
@@ -46,27 +49,96 @@
             android:layout_height="match_parent"
             android:layout_below="@id/setting_divider"
             android:orientation="horizontal">
-        <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:id="@+id/slidemenu_icon"
-            android:scaleType="centerCrop"
-            android:layout_marginLeft="20dp"
-            android:layout_centerVertical="true"
-            android:background="@drawable/slidemenu_setting_icon"/>
-        <TextView
-            android:layout_toRightOf="@id/slidemenu_icon"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:layout_marginLeft="20dp"
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:id="@+id/slidemenu_icon"
+                android:scaleType="centerCrop"
+                android:layout_marginLeft="20dp"
+                android:layout_centerVertical="true"
+                android:background="@drawable/slidemenu_setting_icon"/>
+            <TextView
+                android:layout_toRightOf="@id/slidemenu_icon"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="20dp"
+                android:layout_width="match_parent"
+                android:textColor="#000000"
+                android:textSize="16dp"
+                android:textStyle="normal"
+                android:id="@+id/slidemenu_settings"
+                android:text="@string/slide_menu_settings"
+                />
+            </RelativeLayout>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_above="@id/slidemenu_settings_layout"
+        android:layout_height="50dp">
+        <View
             android:layout_width="match_parent"
-            android:textColor="#000000"
-            android:textSize="20dp"
-            android:textStyle="normal"
-            android:id="@+id/slidemenu_settings"
-            android:text="@string/slide_menu_settings"
-            />
-        </RelativeLayout>
+            android:layout_height="1px"
+            android:layout_alignParentTop="true"
+            android:id="@+id/slidemenu_member_divider"
+            android:background="@color/divider_color"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_below="@id/slidemenu_member_divider"
+            android:id="@+id/slidemenu_member"
+            android:weightSum="1"
+            android:layout_height="50dp">
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:layout_height="match_parent"
+                android:clickable="true"
+                android:background="@drawable/selector_slidemenu_settings">
+
+                <View
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/add_new_member"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/black"
+                    android:textSize="16dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:gravity="center_vertical"
+                    android:text="@string/slide_menu_member_add"/>
+            </RelativeLayout>
+            <View
+                android:layout_width="1px"
+                android:layout_height="match_parent"
+                android:background="@color/divider_color" />
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:background="@drawable/selector_slidemenu_settings"
+                android:clickable="true"
+                android:layout_height="match_parent">
+                <View
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/remove_member"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/black"
+                    android:textSize="16dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:gravity="center_vertical"
+                    android:text="@string/slide_menu_member_remove"/>
+            </RelativeLayout>
+        </LinearLayout>
     </RelativeLayout>
 </RelativeLayout>
 

@@ -15,12 +15,19 @@ public abstract class CommonDialog extends Dialog {
 
     private View back;
 
+    private LinearLayout mainLayout;
+
+    private View naviBar;
+
 	public CommonDialog(Context context) {
         super(context, android.R.style.Theme_Light);
         mContext = context;
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().getAttributes().windowAnimations = R.style.dialog_animation;
         setContentView(R.layout.dialog_layout);
+
+        mainLayout = (LinearLayout) findViewById(R.id.dialog_layout);
+        naviBar = findViewById(R.id.navi_bar);
 
         back = (View) findViewById(R.id.navi_back);
         back.setOnClickListener(new View.OnClickListener() {
@@ -33,8 +40,12 @@ public abstract class CommonDialog extends Dialog {
         });
     }
     protected void setMainView(int view_id){
-        LinearLayout mainLayout = (LinearLayout) findViewById(R.id.dialog_layout);
+
         mainLayout.addView(LayoutInflater.from(mContext).inflate(view_id, null));
+    }
+
+    protected void setNaviBackgroundColor(int color){
+        naviBar.setBackgroundColor(color);
     }
 
     protected void onBackKeyDown(){
