@@ -41,7 +41,7 @@ public abstract class TabDialog extends CommonDialog{
 	public TabDialog(Context context) {
 		super(context);
 		mContext = context;
-		setMainView(R.layout.tab_dialog);
+		setContextView(R.layout.tab_dialog);
 		//從子類別那邊得到的view陣列
 		mPagerViews = getMainViewList(mContext);
 		TAB_COUNT = mPagerViews.size();

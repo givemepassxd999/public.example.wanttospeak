@@ -10,6 +10,7 @@ import com.example.givemepass.wanttospeak.R;
 
 public abstract class CommonDialog extends Dialog {
     private Context mContext;
+    private View naviBar;
 
     public CommonDialog(Context context) {
         super(context, android.R.style.Theme_Light);
@@ -22,6 +23,7 @@ public abstract class CommonDialog extends Dialog {
     }
 
     private void setupBackButton() {
+        naviBar = findViewById(R.id.navi_bar);
         View back = findViewById(R.id.navi_back);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -34,6 +36,10 @@ public abstract class CommonDialog extends Dialog {
     protected void setContextView(int viewId){
         LinearLayout mainLayout = (LinearLayout) findViewById(R.id.dialog_layout);
         mainLayout.addView(LayoutInflater.from(mContext).inflate(viewId, null));
+    }
+
+    protected void setNaviBackgroundColor(int color){
+        naviBar.setBackgroundColor(color);
     }
 
     protected void onBackKeyDown(){
