@@ -10,6 +10,7 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 
 import com.example.givemepass.wanttospeak.R;
+import com.wanttospeak.member.MemberTabDialog;
 
 /**
  * Created by givemepass on 2015/5/9.
@@ -25,6 +26,10 @@ public class SlideMenuView extends RelativeLayout {
     private Context mContext;
 
     private View settingsLayout;
+
+    private View addMember;
+
+    private View deleteMember;
 
     public SlideMenuView(Context context) {
         super(context);
@@ -49,6 +54,23 @@ public class SlideMenuView extends RelativeLayout {
                         view.setEnabled(true);
                     }
                 }, 300);
+            }
+        });
+
+        addMember = findViewById(R.id.slidemenu_add_member_layout);
+        deleteMember = findViewById(R.id.slidemenu_del_member_layout);
+        addMember.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new MemberTabDialog(mContext).show();
+            }
+        });
+        deleteMember.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MemberTabDialog mMemberTabDialog = new MemberTabDialog(mContext);
+                mMemberTabDialog.setIndicator(1);
+                mMemberTabDialog.show();
             }
         });
     }

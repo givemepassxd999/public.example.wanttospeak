@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">wanttospeak</string>
+    <string name="app_name">我有話要說</string>
     <string name="title_activity_main">MainActivity</string>
 
     <string name="hello_world">Hello world!</string>

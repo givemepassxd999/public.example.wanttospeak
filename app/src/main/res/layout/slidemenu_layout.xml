@@ -92,6 +92,7 @@
                 android:layout_weight="0.5"
                 android:layout_height="match_parent"
                 android:clickable="true"
+                android:id="@+id/slidemenu_add_member_layout"
                 android:background="@drawable/selector_slidemenu_settings">
 
                 <View
@@ -120,6 +121,7 @@
                 android:layout_weight="0.5"
                 android:background="@drawable/selector_slidemenu_settings"
                 android:clickable="true"
+                android:id="@+id/slidemenu_del_member_layout"
                 android:layout_height="match_parent">
                 <View
                     android:layout_alignParentLeft="true"
