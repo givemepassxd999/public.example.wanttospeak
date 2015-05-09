@@ -1,4 +1,4 @@
-package com.example.givemepass.wanttospeak;
+package com.wanttospeak.main;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -8,9 +8,11 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
 
 import com.androidquery.AQuery;
-import com.example.wanttospeak.CommonDialog;
+import com.example.givemepass.wanttospeak.R;
+import com.wanttospeak.slidemenu.SlideMenuView;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -18,6 +20,9 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
     private Context mContext;
 
+    private SlideMenuView mSlideMenuView;
+
+    private LinearLayout mSlideContainer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,9 +37,14 @@ public class MainActivity extends AppCompatActivity {
         aq.id(R.id.add_item).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new CommonDialog(mContext).show();
+
             }
         });
+        mSlideMenuView = new SlideMenuView(this);
+        mSlideContainer = (LinearLayout) findViewById(R.id.slidemenu_container);
+        mSlideContainer.addView(mSlideMenuView,
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT);
     }
 
     private void setupDrawer(){
@@ -45,14 +55,14 @@ public class MainActivity extends AppCompatActivity {
                 if (isSideMenuOpen()) {
                     mDrawerLayout.closeDrawer(Gravity.START);
                 }else {
-                    mDrawerLayout.openDrawer(aq.id(R.id.left_drawer).getView());
+                    mDrawerLayout.openDrawer(mSlideContainer);
                 }
             }
         });
     }
 
     private boolean isSideMenuOpen(){
-        return mDrawerLayout.isDrawerOpen(aq.id(R.id.left_drawer).getView());
+        return mDrawerLayout.isDrawerOpen(mSlideContainer);
     }
 
     private class MyGridAdapter extends BaseAdapter{

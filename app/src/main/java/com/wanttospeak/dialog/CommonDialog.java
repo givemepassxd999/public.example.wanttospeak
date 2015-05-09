@@ -1,4 +1,4 @@
-package com.example.wanttospeak;
+package com.wanttospeak.dialog;
 
 import android.app.Dialog;
 import android.content.Context;
