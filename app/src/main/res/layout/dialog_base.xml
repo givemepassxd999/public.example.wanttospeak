@@ -8,15 +8,37 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="#6bd7af"
+        android:layout_alignParentTop="true"
         >
+
+        <View
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/add"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:id="@+id/navi_add"
+            android:visibility="gone"
+            />
         <View
             android:id="@+id/navi_back"
             android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginLeft="10dp"
             android:background="@drawable/navi_icon_back"
             />
+        <TextView
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:id="@+id/navi_back_text"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:layout_toRightOf="@+id/navi_back" />
     </RelativeLayout>
 
     <LinearLayout
@@ -25,6 +47,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:background="@color/white"
         />
 
 </RelativeLayout>

@@ -9,4 +9,7 @@
     <string name="slide_menu_member_remove">刪除成員</string>
     <string name="ok">確定</string>
     <string name="add_member_name">請輸入名字</string>
+    <string name="two_option">二選一</string>
+    <string name="three_option">三選一</string>
+    <string name="four_option">四選一</string>
 </resources>

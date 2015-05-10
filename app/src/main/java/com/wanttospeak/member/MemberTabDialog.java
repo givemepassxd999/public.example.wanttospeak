@@ -21,6 +21,7 @@ public class MemberTabDialog extends TabDialog{
         super(context);
         mContext = context;
         setNaviBackgroundColor(Color.parseColor("#FFBBDD"));
+        setContextViewBackground(Color.parseColor("#dddddd"));
     }
 
     @Override
