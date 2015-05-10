@@ -50,10 +50,14 @@
 
         <GridView
             android:layout_below="@id/main_action_bar"
-            android:id="@+id/add_voice"
+            android:id="@+id/choice_grid"
+            android:numColumns="2"
             android:layout_width="match_parent"
-            android:visibility="gone"
             android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_margin="20dp"
+            android:verticalSpacing="20dp"
+            android:listSelector="#ffffff"
             />
 
     </RelativeLayout>
