@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.androidquery.AQuery;
 import com.example.givemepass.wanttospeak.R;
 import com.wanttospeak.cache.Constant;
+import com.wanttospeak.cache.DataHelper;
 import com.wanttospeak.dialog.DataDialog;
 import com.wanttospeak.items.ItemDetailListDialog;
 import com.wanttospeak.slidemenu.SlideMenuView;
@@ -34,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //一開始就先設定person id
+        DataHelper.setCurrentPersonId("123");
         aq = new AQuery(this);
         mContext = this;
         initView();
