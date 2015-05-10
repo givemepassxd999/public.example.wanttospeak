@@ -54,7 +54,7 @@ public class MyCombination {
     }
 
     //設定某人的組合
-    public static void setItemCombination(String personId, MulitipleChoice choice, int type){
+    public static void addItemCombination(String personId, MulitipleChoice choice, int type){
         ArrayList<MulitipleChoice> mulitipleChoiceList = getInstance().getItemsCombinationList(personId, type);
         if(mulitipleChoiceList == null){
             mulitipleChoiceList = new ArrayList<MulitipleChoice>();

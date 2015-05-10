@@ -51,11 +51,13 @@ public class MyItemList {
         return getInstance().personalItemList.get(personId);
     }
 
-    public static HashMap<String, ArrayList<ItemObject>> getPersonalItemList() {
-        return getInstance().personalItemList;
-    }
-
-    public static void setPersonalItemList(HashMap<String, ArrayList<ItemObject>> personalItemList) {
-        getInstance().personalItemList = personalItemList;
+    //將item加入到某人的item list
+    public static void addPersonalItem(String personId, ItemObject item){
+        ArrayList<ItemObject> itemList = getItemListByPersonId(personId);
+        if(itemList == null){
+            itemList = new ArrayList<ItemObject>();
+        }
+        itemList.add(item);
+        getInstance().personalItemList.put(personId, itemList);
     }
 }
