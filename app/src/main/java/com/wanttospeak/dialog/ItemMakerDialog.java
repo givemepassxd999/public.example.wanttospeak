@@ -5,13 +5,17 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.Toast;
+
 import com.wanttospeak.items.Item;
 
 import com.example.givemepass.wanttospeak.R;
@@ -27,6 +31,7 @@ public class ItemMakerDialog extends CommonDialog {
     private File photoFile;
     private File recordFile;
     private Item item;
+    private MediaRecorder mediaRecorder;
 
     public ItemMakerDialog(Activity activity) {
         super(activity);
@@ -34,17 +39,48 @@ public class ItemMakerDialog extends CommonDialog {
         setContextView(R.layout.add_new_item);
 
         item = new Item();
+        mediaRecorder = new MediaRecorder();
+
         setupPicturePicker();
-        setupNaviAction();
+        setupRecorder();
+        setupSaveButton();
     }
 
-    private void setupNaviAction() {
-        setNaviActionIcon(R.drawable.done);
-        setNaviActionVisible(View.INVISIBLE);
-        setOnNaviActionListener(new View.OnClickListener() {
+    private void setupRecorder() {
+        Button recordButton = (Button) findViewById(R.id.bt_record);
+        recordButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (v.isSelected()) {
+                    v.setBackgroundResource(R.drawable.record);
+                    stopRecord();
+                    v.setSelected(false);
+                } else {
+                    if(recordFile == null) {
+                        v.setBackgroundResource(R.drawable.finish);
+                        dispatchRecordIntent();
+                        v.setSelected(true);
+                    }else {
+                        Toast.makeText(activity, "record exist! u can't try again!", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        });
+        Button runButton = (Button) findViewById(R.id.bt_run);
+        runButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                playRecord();
+            }
+        });
+    }
 
+    private void setupSaveButton() {
+        Button saveButton = (Button) findViewById(R.id.add_item_button);
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // save item to itemlists
             }
         });
     }
@@ -87,14 +123,11 @@ public class ItemMakerDialog extends CommonDialog {
         cursor.close();
     }
 
-    public void notifiRecordReady() {
-        Item item = new Item();
-        item.setPhotoPath(photoFile.getAbsolutePath());
-//        dispatchRecordIntent();
+    private void notifiRecordReady() {
+        item.setRecordPath(recordFile.getAbsolutePath());
     }
 
     private void dispatchRecordIntent() {
-        MediaRecorder mediaRecorder = new MediaRecorder();
         mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
         mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
         mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
@@ -108,10 +141,35 @@ public class ItemMakerDialog extends CommonDialog {
         try {
             mediaRecorder.prepare();
             mediaRecorder.start();
-        }
-        catch (IOException e) {
+        }catch (IOException e) {
             Log.e(activity.getPackageName(), e.getMessage(), e);
         }
+    }
+
+    private void stopRecord() {
+        mediaRecorder.stop();
+        mediaRecorder.release();
+    }
+
+    private void playRecord() {
+        if(recordFile == null) return;
+        final MediaPlayer mediaPlayer = new MediaPlayer();
+        try {
+            mediaPlayer.setDataSource(recordFile.getAbsolutePath());
+            mediaPlayer.prepare();
+            mediaPlayer.start();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                mediaPlayer.stop();
+                mediaPlayer.release();
+            }
+        });
     }
 
     private void dispatchTakePictureIntent() {

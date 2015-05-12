@@ -29,31 +29,22 @@
         android:orientation="horizontal"
         android:layout_marginTop="30dp"
         android:layout_below="@+id/avatar_layout">
-        <ImageView
-            android:id="@+id/iv_record"
+        <Button
+            android:id="@+id/bt_record"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:scaleType="centerCrop"
-            android:src="@drawable/record"
+            android:background="@drawable/record"
             />
-        <ImageView
-            android:id="@+id/iv_run"
+        <Button
+            android:id="@+id/bt_run"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:layout_marginLeft="20dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/run"
-            />
-        <ImageView
-            android:id="@+id/iv_delete"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="20dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/delete_record"
+            android:background="@drawable/run"
             />
     </LinearLayout>
     <EditText
@@ -69,5 +60,19 @@
         android:textSize="16sp"
         android:textColorHint="#abaaaa"
         android:hint="@string/add_item_name"
+        />
+
+    <Button
+        android:id="@+id/add_item_button"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_below="@id/add_item_name"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:textSize="16sp"
+        android:background="#56BAEC"
+        android:textColor="#ffffff"
+        android:text="@string/save"
         />
 </RelativeLayout>

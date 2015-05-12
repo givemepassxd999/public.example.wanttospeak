@@ -8,6 +8,7 @@
     <string name="slide_menu_member_add">新增成員</string>
     <string name="slide_menu_member_remove">刪除成員</string>
     <string name="ok">確定</string>
+    <string name="save">儲存</string>
     <string name="add_member_name">請輸入名字</string>
     <string name="add_item_name">請輸入項目名稱</string>
     <string name="picture_chooser_name">請選擇相片來源</string>
