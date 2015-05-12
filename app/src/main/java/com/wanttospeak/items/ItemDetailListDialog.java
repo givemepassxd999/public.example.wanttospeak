@@ -39,8 +39,8 @@ public class ItemDetailListDialog extends CommonDialog{
 
     private void initView(int type){
         setContextView(R.layout.item_detail_list);
-        setNaviBackgroundColor(Color.parseColor("#FFBBDD"));
-        setNaviAddVisible(View.VISIBLE);
+        setNaviActionVisible(View.VISIBLE);
+        setNaviActionIcon(R.drawable.add);
         switch(type){
             case Constant.TWO_OPTIONS:
                 setNaviBackText(mContext.getString(R.string.two_option));

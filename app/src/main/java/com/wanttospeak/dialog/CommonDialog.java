@@ -16,7 +16,7 @@ public abstract class CommonDialog extends Dialog {
     private View naviBar;
 
     private TextView naviBackText;
-    private View naviAdd;
+    private View naviAction;
 
     private LinearLayout mainLayout;
     public CommonDialog(Context context) {
@@ -39,16 +39,20 @@ public abstract class CommonDialog extends Dialog {
             }
         });
         naviBackText = (TextView) findViewById(R.id.navi_back_text);
-        naviAdd = findViewById(R.id.navi_add);
+        naviAction = findViewById(R.id.navi_action);
         mainLayout = (LinearLayout) findViewById(R.id.dialog_layout);
     }
 
-    protected void setNaviAddVisible(int visible){
-        naviAdd.setVisibility(visible);
+    protected void setNaviActionVisible(int visible){
+        naviAction.setVisibility(visible);
     }
 
-    protected void setOnNaviAddListener(View.OnClickListener listener){
-        naviAdd.setOnClickListener(listener);
+    protected void setNaviActionIcon(int resourceId){
+        naviAction.setBackgroundResource(resourceId);
+    }
+
+    protected void setOnNaviActionListener(View.OnClickListener listener){
+        naviAction.setOnClickListener(listener);
     }
 
     protected void setNaviBackText(String text){

@@ -20,30 +20,54 @@
             android:src="@drawable/photo"
             />
     </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_record_action"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal"
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/avatar_layout">
+        <ImageView
+            android:id="@+id/iv_record"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"
+            android:src="@drawable/record"
+            />
+        <ImageView
+            android:id="@+id/iv_run"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/run"
+            />
+        <ImageView
+            android:id="@+id/iv_delete"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/delete_record"
+            />
+    </LinearLayout>
     <EditText
         android:id="@+id/add_item_name"
         android:layout_marginTop="30dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
+        android:paddingLeft="20dp"
         android:background="@color/white"
-        android:layout_below="@id/avatar_layout"
+        android:layout_below="@+id/ll_record_action"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:textSize="16sp"
         android:textColorHint="#abaaaa"
         android:hint="@string/add_item_name"
         />
-    <Button
-        android:id="@+id/add_item_button"
-        android:layout_marginTop="30dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_below="@id/add_item_name"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:textSize="16sp"
-        android:background="#abaaaa"
-        android:textColor="#ffffff"
-        android:text="@string/ok"
-       />
 </RelativeLayout>

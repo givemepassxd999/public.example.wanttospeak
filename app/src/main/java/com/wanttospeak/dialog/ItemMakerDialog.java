@@ -5,7 +5,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.BitmapFactory;
 import android.media.MediaRecorder;
 import android.net.Uri;
 import android.os.Environment;
@@ -13,9 +12,6 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
-
-import com.androidquery.AQuery;
 import com.wanttospeak.items.Item;
 
 import com.example.givemepass.wanttospeak.R;
@@ -39,6 +35,18 @@ public class ItemMakerDialog extends CommonDialog {
 
         item = new Item();
         setupPicturePicker();
+        setupNaviAction();
+    }
+
+    private void setupNaviAction() {
+        setNaviActionIcon(R.drawable.done);
+        setNaviActionVisible(View.INVISIBLE);
+        setOnNaviActionListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
     private void setupPicturePicker() {

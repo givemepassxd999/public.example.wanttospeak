@@ -11,7 +11,7 @@
         <ImageView
             android:layout_centerInParent="true"
             android:layout_width="64dp"
-            android:background="@drawable/skype_pink"
+            android:background="@drawable/talk"
             android:scaleType="centerCrop"
             android:layout_height="64dp"/>
         <View
@@ -56,7 +56,7 @@
                 android:scaleType="centerCrop"
                 android:layout_marginLeft="20dp"
                 android:layout_centerVertical="true"
-                android:background="@drawable/slidemenu_setting_icon"/>
+                android:background="@drawable/settings"/>
             <TextView
                 android:layout_toRightOf="@id/slidemenu_icon"
                 android:layout_height="match_parent"
@@ -99,7 +99,7 @@
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="20dp"
-                    android:background="@drawable/add_new_member"
+                    android:background="@drawable/add_person"
                     android:layout_width="24dp"
                     android:layout_height="24dp"/>
                 <TextView
@@ -127,7 +127,7 @@
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="20dp"
-                    android:background="@drawable/remove_member"
+                    android:background="@drawable/remove_person"
                     android:layout_width="24dp"
                     android:layout_height="24dp"/>
                 <TextView
