@@ -5,7 +5,7 @@ package com.wanttospeak.cache;
  */
 public class OptionChoice extends MulitipleChoice{
     @Override
-    protected void setType(int type) {
+    public void setType(int type) {
         this.type = type;
     }
 
