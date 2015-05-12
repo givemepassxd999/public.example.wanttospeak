@@ -1,11 +1,13 @@
 package com.wanttospeak.dialog;
 
 import android.app.Activity;
+import android.content.ClipData;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
+import com.wanttospeak.items.Item;
 
 import com.example.givemepass.wanttospeak.R;
 import com.wanttospeak.util.IdGenerator;
@@ -27,7 +29,8 @@ public class ItemMakerDialog extends CommonDialog {
     }
 
     public void notifiPictureReady() {
-
+        Item item = new Item();
+        item.setPhotoPath(photoFile.getPath());
     }
 
     private void dispatchTakePictureIntent() {
