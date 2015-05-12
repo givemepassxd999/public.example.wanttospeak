@@ -15,7 +15,13 @@ public abstract class MulitipleChoice{
         itemList = new ArrayList<String>();
     }
 
-    protected abstract void setType(int type);
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
 
     protected abstract void addItemId(String itemId);
 }

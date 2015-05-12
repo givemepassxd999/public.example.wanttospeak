@@ -10,8 +10,11 @@ import android.widget.ListView;
 import com.example.givemepass.wanttospeak.R;
 import com.wanttospeak.cache.Constant;
 import com.wanttospeak.cache.DataHelper;
+import com.wanttospeak.cache.MulitipleChoice;
 import com.wanttospeak.cache.MyCombination;
 import com.wanttospeak.dialog.CommonDialog;
+
+import java.util.ArrayList;
 
 /**
  * Created by givemepass on 2015/5/10.
@@ -58,7 +61,12 @@ public class ItemDetailListDialog extends CommonDialog{
     private class ItemDetailListAdapter extends BaseAdapter{
         @Override
         public int getCount() {
-            return MyCombination.getItemsCombinationList(DataHelper.getCurrentPersonId(), type).size();
+            ArrayList<MulitipleChoice> list = MyCombination.getItemsCombinationList(DataHelper.getCurrentPersonId(), type);
+            if(null != list) {
+                return list.size();
+            } else{
+                return 0;
+            }
         }
 
         @Override
