@@ -18,7 +18,11 @@ public class MyCombination {
 
     private static MyCombination mInstance;
 
-    private MyCombination(){}
+    private MyCombination(){
+        twoOptionCombinationList = new HashMap<String, ArrayList<MulitipleChoice>>();
+        threeOptionCombinationList = new HashMap<String, ArrayList<MulitipleChoice>>();
+        fourOptionCombinationList = new HashMap<String, ArrayList<MulitipleChoice>>();
+    }
 
     public static MyCombination getInstance(){
         if(mInstance == null){
@@ -54,21 +58,23 @@ public class MyCombination {
     }
 
     //設定某人的組合
-    public static void addItemCombination(String personId, MulitipleChoice choice, int type){
-        ArrayList<MulitipleChoice> mulitipleChoiceList = getInstance().getItemsCombinationList(personId, type);
+    public static void addItemCombination(String personId, MulitipleChoice choice){
+        ArrayList<MulitipleChoice> mulitipleChoiceList = getInstance().getItemsCombinationList(personId, choice.getType());
         if(mulitipleChoiceList == null){
             mulitipleChoiceList = new ArrayList<MulitipleChoice>();
         }
         mulitipleChoiceList.add(choice);
 
-        if(type == Constant.TWO_OPTIONS) {
-            getInstance().twoOptionCombinationList.put(personId, mulitipleChoiceList);
-        }
-        else if(type == Constant.THREE_OPTIONS) {
-            getInstance().threeOptionCombinationList.put(personId, mulitipleChoiceList);
-        }
-        else if(type == Constant.FOUR_OPTIONS){
-            getInstance().fourOptionCombinationList.put(personId, mulitipleChoiceList);
+        switch(choice.getType()) {
+            case Constant.TWO_OPTIONS:
+                getInstance().twoOptionCombinationList.put(personId, mulitipleChoiceList);
+                break;
+            case Constant.THREE_OPTIONS:
+                getInstance().threeOptionCombinationList.put(personId, mulitipleChoiceList);
+                break;
+            case Constant.FOUR_OPTIONS:
+                getInstance().fourOptionCombinationList.put(personId, mulitipleChoiceList);
+                break;
         }
 
     }

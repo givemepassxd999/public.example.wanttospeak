@@ -17,7 +17,9 @@ public class MyItemList {
         return mInstance;
     }
 
-    private MyItemList(){}
+    private MyItemList(){
+        personalItemList = new HashMap<String, ArrayList<ItemObject>>();
+    }
 
     //¬Y¤Hªºitem list
     private HashMap<String, ArrayList<ItemObject>> personalItemList;

@@ -19,6 +19,8 @@ import com.androidquery.AQuery;
 import com.example.givemepass.wanttospeak.R;
 import com.wanttospeak.cache.Constant;
 import com.wanttospeak.cache.DataHelper;
+import com.wanttospeak.cache.ItemObject;
+import com.wanttospeak.cache.MyItemList;
 import com.wanttospeak.dialog.DataDialog;
 import com.wanttospeak.items.ItemDetailListDialog;
 import com.wanttospeak.slidemenu.SlideMenuView;
@@ -37,6 +39,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         //一開始就先設定person id
         DataHelper.setCurrentPersonId("123");
+
+        //假item
+        ItemObject mItemObject = new ItemObject();
+        MyItemList.addPersonalItem(DataHelper.getCurrentPersonId(), mItemObject);
         aq = new AQuery(this);
         mContext = this;
         initView();
