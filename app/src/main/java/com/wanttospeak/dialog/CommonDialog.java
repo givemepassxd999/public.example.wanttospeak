@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -55,7 +56,7 @@ public abstract class CommonDialog extends Dialog {
     }
 
     protected void setContextView(int viewId){
-        mainLayout.addView(LayoutInflater.from(mContext).inflate(viewId, null));
+        mainLayout.addView(LayoutInflater.from(mContext).inflate(viewId, null), ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
     }
 
     protected void setContextViewBackground(int color){

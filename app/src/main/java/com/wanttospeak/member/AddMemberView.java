@@ -15,7 +15,6 @@ public class AddMemberView extends RelativeLayout {
     public AddMemberView(Context context) {
         super(context);
         View mainView = LayoutInflater.from(context).inflate(R.layout.add_new_member, null);
-
         addView(mainView, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
     }
 }

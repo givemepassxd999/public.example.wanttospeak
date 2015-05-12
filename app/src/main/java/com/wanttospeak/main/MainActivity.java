@@ -85,8 +85,15 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == ItemMakerDialog.REQUEST_TAKE_PHOTO && resultCode == RESULT_OK) {
-            itemMakerDialog.notifiPictureReady();
+        if(resultCode == RESULT_OK) {
+            switch (requestCode) {
+                case ItemMakerDialog.REQUEST_TAKE_PHOTO:
+                    itemMakerDialog.notifiNewPictureReady();
+                    break;
+                case ItemMakerDialog.RESULT_LOAD_IMAGE:
+                    itemMakerDialog.notifiGalleryPictureReady(data.getData());
+                    break;
+            }
         }
     }
 
