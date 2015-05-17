@@ -12,11 +12,11 @@ import android.media.MediaRecorder;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.FrameLayout;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -81,11 +81,20 @@ public class ItemMakerDialog extends CommonDialog {
     }
 
     private void setupSaveButton() {
-        Button saveButton = (Button) findViewById(R.id.add_item_button);
+        final Button saveButton = (Button) findViewById(R.id.add_item_button);
+        final EditText nameTextView = (EditText) findViewById(R.id.add_item_name);
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // save item to itemlists
+                if(TextUtils.isEmpty(item.getPhotoPath())){
+                    Toast.makeText(activity, "你忘記拍照囉 :)", Toast.LENGTH_SHORT).show();
+                }else if(TextUtils.isEmpty(item.getRecordPath())) {
+                    Toast.makeText(activity, "你忘記錄音囉 :)", Toast.LENGTH_SHORT).show();
+                }else if(TextUtils.isEmpty(nameTextView.getText().toString())) {
+                    Toast.makeText(activity, "你忘記輸入名稱囉 :)", Toast.LENGTH_SHORT).show();
+                }else {
+                    // save item
+                }
             }
         });
     }
@@ -165,6 +174,7 @@ public class ItemMakerDialog extends CommonDialog {
     private void stopRecord() {
         mediaRecorder.stop();
         mediaRecorder.release();
+        notifiRecordReady();
     }
 
     private void playRecord() {
