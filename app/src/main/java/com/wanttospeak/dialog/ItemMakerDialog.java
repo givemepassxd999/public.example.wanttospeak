@@ -5,6 +5,8 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.net.Uri;
@@ -12,8 +14,11 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.wanttospeak.items.Item;
@@ -56,11 +61,11 @@ public class ItemMakerDialog extends CommonDialog {
                     stopRecord();
                     v.setSelected(false);
                 } else {
-                    if(recordFile == null) {
+                    if (recordFile == null) {
                         v.setBackgroundResource(R.drawable.finish);
                         dispatchRecordIntent();
                         v.setSelected(true);
-                    }else {
+                    } else {
                         Toast.makeText(activity, "record exist! u can't try again!", Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -86,8 +91,8 @@ public class ItemMakerDialog extends CommonDialog {
     }
 
     private void setupPicturePicker() {
-        FrameLayout view = (FrameLayout) findViewById(R.id.avatar_layout);
-        view.setOnClickListener(new View.OnClickListener() {
+        RelativeLayout pictureSelector = (RelativeLayout) findViewById(R.id.rl_avatar_layout);
+        pictureSelector.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(activity);
@@ -112,6 +117,7 @@ public class ItemMakerDialog extends CommonDialog {
 
     public void notifiNewPictureReady() {
         item.setPhotoPath(photoFile.getAbsolutePath());
+        showPhotoView();
     }
 
     public void notifiGalleryPictureReady(Uri uri) {
@@ -121,6 +127,16 @@ public class ItemMakerDialog extends CommonDialog {
         int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
         item.setPhotoPath(cursor.getString(columnIndex));
         cursor.close();
+        showPhotoView();
+    }
+
+    private void showPhotoView() {
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+        Bitmap photo = BitmapFactory.decodeFile(item.getPhotoPath(), options);
+        ImageView photoView = (ImageView) findViewById(R.id.add_item_picture);
+        photoView.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT));
+        photoView.setImageBitmap(photo);
     }
 
     private void notifiRecordReady() {
