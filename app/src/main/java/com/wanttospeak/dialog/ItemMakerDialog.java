@@ -44,8 +44,8 @@ public class ItemMakerDialog extends CommonDialog {
         setContextView(R.layout.add_new_item);
 
         item = new Item();
-        mediaRecorder = new MediaRecorder();
 
+        setupRecordFile();
         setupPicturePicker();
         setupRecorder();
         setupSaveButton();
@@ -61,12 +61,22 @@ public class ItemMakerDialog extends CommonDialog {
                     stopRecord();
                     v.setSelected(false);
                 } else {
-                    if (recordFile == null) {
-                        v.setBackgroundResource(R.drawable.finish);
-                        dispatchRecordIntent();
-                        v.setSelected(true);
+                    v.setBackgroundResource(R.drawable.finish);
+                    doRecording();
+                    v.setSelected(true);
+                }
+            }
+        });
+        Button deleteButton = (Button) findViewById(R.id.bt_delete);
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (recordFile != null) {
+                    if (recordFile.delete()) {
+                        recordFile = null;
+                        Toast.makeText(activity, "刪除成功，請重新錄音 :)", Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(activity, "record exist! u can't try again!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(activity, "刪除失敗，請再試一次 :(", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -75,7 +85,11 @@ public class ItemMakerDialog extends CommonDialog {
         runButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                playRecord();
+                if (recordFile != null) {
+                    playRecord();
+                } else {
+                    Toast.makeText(activity, "噢喔！你忘記錄音了喔 :錄音擋已存在", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -152,7 +166,8 @@ public class ItemMakerDialog extends CommonDialog {
         item.setRecordPath(recordFile.getAbsolutePath());
     }
 
-    private void dispatchRecordIntent() {
+    private void setupRecordFile() {
+        mediaRecorder = new MediaRecorder();
         mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
         mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
         mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
@@ -162,7 +177,11 @@ public class ItemMakerDialog extends CommonDialog {
             Log.e(activity.getPackageName(), "Failed to create record file.");
         }
 
-        mediaRecorder.setOutputFile(this.recordFile.getAbsolutePath());
+        mediaRecorder.setOutputFile(recordFile.getAbsolutePath());
+    }
+
+    private void doRecording() {
+        if(mediaRecorder == null) setupRecordFile();
         try {
             mediaRecorder.prepare();
             mediaRecorder.start();
@@ -178,7 +197,6 @@ public class ItemMakerDialog extends CommonDialog {
     }
 
     private void playRecord() {
-        if(recordFile == null) return;
         final MediaPlayer mediaPlayer = new MediaPlayer();
         try {
             mediaPlayer.setDataSource(recordFile.getAbsolutePath());
@@ -223,7 +241,9 @@ public class ItemMakerDialog extends CommonDialog {
         String imageFileName = "JPEG_" + IdGenerator.createId();
         File storageDir = new File(Environment.getExternalStorageDirectory() + "/WantToSpeak/Picture");
         if (!storageDir.exists()) {
-            storageDir.mkdirs();
+            if(!storageDir.mkdirs()) {
+                Log.e(activity.getPackageName(), "Failed to create photo folder.");
+            }
         }
 
         return File.createTempFile(imageFileName, ".jpg", storageDir);
@@ -233,7 +253,9 @@ public class ItemMakerDialog extends CommonDialog {
         String imageFileName = "RECORD_" + IdGenerator.createId();
         File storageDir = new File(Environment.getExternalStorageDirectory() + "/WantToSpeak/Record");
         if (!storageDir.exists()) {
-            storageDir.mkdirs();
+            if(!storageDir.mkdirs()) {
+                Log.e(activity.getPackageName(), "Failed to create record folder.");
+            }
         }
 
         return File.createTempFile(imageFileName, ".3gp", storageDir);

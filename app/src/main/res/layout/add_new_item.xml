@@ -52,6 +52,15 @@
                 android:scaleType="centerCrop"
                 android:background="@drawable/run"
                 />
+            <Button
+                android:id="@+id/bt_delete"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
+                android:scaleType="centerCrop"
+                android:background="@drawable/delete_record"
+                />
         </LinearLayout>
         <EditText
             android:id="@+id/add_item_name"
