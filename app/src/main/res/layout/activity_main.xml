@@ -3,7 +3,7 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFF0AA"
+    android:background="@color/dialog_bg"
     >
 
     <!-- The main content view -->
@@ -17,7 +17,7 @@
             android:id="@+id/main_action_bar"
             android:layout_height="50dp"
             android:layout_width="match_parent"
-            android:background="#6bd7af"
+            android:background="@color/actionbar_color"
             android:layout_alignParentTop="true"
             >
 
@@ -32,7 +32,7 @@
                 android:layout_height="32dp"
                 android:layout_width="32dp"
                 android:layout_marginRight="10dp"
-                android:background="@drawable/add_item"
+                android:background="@drawable/new_item"
                 android:layout_alignParentRight="true"
                 android:layout_centerInParent="true"
                 />
@@ -43,7 +43,7 @@
                 android:layout_height="32dp"
                 android:layout_marginLeft="10dp"
                 android:layout_width="32dp"
-                android:background="@drawable/info"
+                android:background="@drawable/home"
                 />
         </RelativeLayout>
 
