@@ -30,7 +30,7 @@ public class MemberTabDialog extends TabDialog{
 
         RemoveMemberView mRemoveMemberView = new RemoveMemberView(context);
         ArrayList<View> mainViewList = new ArrayList<View>();
-        //要按照順序加入
+
         mainViewList.add(mAddMemberView);
         mainViewList.add(mRemoveMemberView);
 

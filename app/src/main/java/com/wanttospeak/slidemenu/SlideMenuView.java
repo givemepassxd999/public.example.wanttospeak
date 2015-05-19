@@ -47,7 +47,7 @@ public class SlideMenuView extends RelativeLayout {
             public void onClick(final View view) {
                 view.setEnabled(false);
                 new SlideMenuSettingsDialog(mContext).show();
-                //防堵快速按多次,跳出多個dialog
+
                 new Handler().postDelayed(new Runnable(){
                     @Override
                     public void run() {
