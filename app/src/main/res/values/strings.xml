@@ -17,4 +17,6 @@
     <string name="two_option">二選一</string>
     <string name="three_option">三選一</string>
     <string name="four_option">四選一</string>
+    <string name="add_item_success">新增成功</string>
+    <string name="add_item_fail">新增成功</string>
 </resources>

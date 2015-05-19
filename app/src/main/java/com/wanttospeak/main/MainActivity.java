@@ -21,11 +21,13 @@ import com.androidquery.AQuery;
 import com.example.givemepass.wanttospeak.R;
 import com.wanttospeak.cache.Constant;
 import com.wanttospeak.cache.DataHelper;
-import com.wanttospeak.cache.ItemObject;
-import com.wanttospeak.cache.MyItemList;
+import com.wanttospeak.items.ItemObject;
 import com.wanttospeak.dialog.ItemMakerDialog;
 import com.wanttospeak.items.ItemDetailListDialog;
 import com.wanttospeak.slidemenu.SlideMenuView;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -43,8 +45,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         //person id
         DataHelper.setCurrentPersonId("123");
-
-        //°²item
+        
         ItemObject mItemObject = new ItemObject();
         MyItemList.addPersonalItem(DataHelper.getCurrentPersonId(), mItemObject);
         aq = new AQuery(this);
@@ -176,6 +177,62 @@ public class MainActivity extends AppCompatActivity {
             ImageView img;
 
             TextView text;
+        }
+    }
+
+    /**
+     * Created by givemepass on 2015/5/9.
+     */
+    public static class MyItemList {
+
+        private static MyItemList mInstance;
+
+        public static MyItemList getInstance(){
+            if(null == mInstance){
+                mInstance = new MyItemList();
+            }
+            return mInstance;
+        }
+
+        private MyItemList(){
+            personalItemList = new HashMap<String, ArrayList<ItemObject>>();
+        }
+
+        private HashMap<String, ArrayList<ItemObject>> personalItemList;
+
+        public static ArrayList<ItemObject> getItemListByPersonId(String personId){
+            return getInstance().personalItemList.get(personId);
+        }
+
+        public static ItemObject getItemObjByPersonIdAndIndex(String personId, int itemListIndex){
+            return getInstance().personalItemList.get(personId).get(itemListIndex);
+        }
+
+        public static ItemObject getItemObjByPersonIdAndItemId(String personId, String itemId){
+            ArrayList<ItemObject> itemList = getInstance().personalItemList.get(personId);
+            for(ItemObject item : itemList){
+                if(item.getItemId().equals(itemId)){
+                    return item;
+                }
+            }
+            return null;
+        }
+
+        public static int getItemCountByPersonId(String personId){
+            return getInstance().personalItemList.get(personId).size();
+        }
+
+        public static ArrayList<ItemObject> getItemList(String personId) {
+            return getInstance().personalItemList.get(personId);
+        }
+
+        public static void addPersonalItem(String personId, ItemObject item){
+            ArrayList<ItemObject> itemList = getItemListByPersonId(personId);
+            if(itemList == null){
+                itemList = new ArrayList<ItemObject>();
+            }
+            itemList.add(item);
+            getInstance().personalItemList.put(personId, itemList);
         }
     }
 }

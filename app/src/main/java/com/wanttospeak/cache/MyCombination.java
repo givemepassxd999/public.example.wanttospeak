@@ -7,13 +7,13 @@ import java.util.HashMap;
  * Created by givemepass on 2015/5/10.
  */
 public class MyCombination {
-    //二選一的陣列
+
     private HashMap<String, ArrayList<MulitipleChoice>> twoOptionCombinationList;
 
-    //三選一的陣列
+
     private HashMap<String, ArrayList<MulitipleChoice>> threeOptionCombinationList;
 
-    //四選一的陣列
+
     private HashMap<String, ArrayList<MulitipleChoice>> fourOptionCombinationList;
 
     private static MyCombination mInstance;
@@ -31,7 +31,7 @@ public class MyCombination {
         return mInstance;
     }
 
-    //取得某人的組合陣列
+
     public static ArrayList<MulitipleChoice> getItemsCombinationList(String personId, int type) {
         if(type == Constant.TWO_OPTIONS) {
             return getInstance().twoOptionCombinationList.get(personId);
@@ -47,7 +47,7 @@ public class MyCombination {
 
     }
 
-    //取得某人的某個組合
+
     public static MulitipleChoice getItemsCombination(String personId, int index, int type) {
         ArrayList<MulitipleChoice> choiceList = getItemsCombinationList(personId, type);
         if(choiceList != null) {
@@ -57,7 +57,7 @@ public class MyCombination {
         }
     }
 
-    //設定某人的組合
+    //嚙稽嚙緩嚙磐嚙瘡嚙踝蕭嚙調合
     public static void addItemCombination(String personId, MulitipleChoice choice){
         ArrayList<MulitipleChoice> mulitipleChoiceList = getInstance().getItemsCombinationList(personId, choice.getType());
         if(mulitipleChoiceList == null){

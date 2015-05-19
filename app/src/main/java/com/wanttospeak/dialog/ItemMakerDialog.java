@@ -21,13 +21,15 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.wanttospeak.items.Item;
-
 import com.example.givemepass.wanttospeak.R;
+import com.j256.ormlite.dao.Dao;
+import com.wanttospeak.items.ItemObject;
+import com.wanttospeak.dao.DatabaseHelper;
 import com.wanttospeak.util.IdGenerator;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class ItemMakerDialog extends CommonDialog {
     public static final int REQUEST_TAKE_PHOTO = 1;
@@ -35,7 +37,7 @@ public class ItemMakerDialog extends CommonDialog {
     private Activity activity;
     private File photoFile;
     private File recordFile;
-    private Item item;
+    private ItemObject item;
     private MediaRecorder mediaRecorder;
 
     public ItemMakerDialog(Activity activity) {
@@ -43,7 +45,7 @@ public class ItemMakerDialog extends CommonDialog {
         this.activity = activity;
         setContextView(R.layout.add_new_item);
 
-        item = new Item();
+        item = new ItemObject();
 
         setupRecordFile();
         setupPicturePicker();
@@ -102,12 +104,26 @@ public class ItemMakerDialog extends CommonDialog {
             public void onClick(View v) {
                 if(TextUtils.isEmpty(item.getPhotoPath())){
                     Toast.makeText(activity, "你忘記拍照囉 :)", Toast.LENGTH_SHORT).show();
-                }else if(TextUtils.isEmpty(item.getRecordPath())) {
+                }
+                else if(TextUtils.isEmpty(item.getRecordPath())) {
                     Toast.makeText(activity, "你忘記錄音囉 :)", Toast.LENGTH_SHORT).show();
-                }else if(TextUtils.isEmpty(nameTextView.getText().toString())) {
+                }
+                else if(TextUtils.isEmpty(nameTextView.getText().toString())) {
                     Toast.makeText(activity, "你忘記輸入名稱囉 :)", Toast.LENGTH_SHORT).show();
                 }else {
                     // save item
+                    DatabaseHelper mDatabaseHelper = new DatabaseHelper(activity);
+                    try {
+                        Dao<ItemObject, String> mItemDao = mDatabaseHelper.getItemDao();
+                        mItemDao.create(item);
+                    } catch (SQLException e) {
+                        Toast.makeText(activity, activity.getString(R.string.add_item_fail),
+                                Toast.LENGTH_SHORT).show();
+                        e.printStackTrace();
+                    }
+                    Toast.makeText(activity, activity.getString(R.string.add_item_success),
+                            Toast.LENGTH_SHORT).show();
+                    dismiss();
                 }
             }
         });

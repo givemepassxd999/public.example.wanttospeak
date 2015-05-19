@@ -20,7 +20,6 @@ public class DataHelper {
         return mInstance;
     }
 
-    //取得目前的person id
     public static String getCurrentPersonId() {
         return getInstance().currentPersonId;
     }

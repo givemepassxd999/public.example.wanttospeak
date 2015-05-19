@@ -1,5 +1,7 @@
 package com.wanttospeak.cache;
 
+import com.wanttospeak.items.ItemObject;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -21,15 +23,12 @@ public class MyItemList {
         personalItemList = new HashMap<String, ArrayList<ItemObject>>();
     }
 
-    //某人的item list
     private HashMap<String, ArrayList<ItemObject>> personalItemList;
 
-    //取得某人的item list
     public static ArrayList<ItemObject> getItemListByPersonId(String personId){
         return getInstance().personalItemList.get(personId);
     }
 
-    //取得某人的item list內的某位置的item物件
     public static ItemObject getItemObjByPersonIdAndIndex(String personId, int itemListIndex){
         return getInstance().personalItemList.get(personId).get(itemListIndex);
     }
@@ -44,7 +43,6 @@ public class MyItemList {
         return null;
     }
 
-    //取得某人item list的數量
     public static int getItemCountByPersonId(String personId){
         return getInstance().personalItemList.get(personId).size();
     }
@@ -53,7 +51,6 @@ public class MyItemList {
         return getInstance().personalItemList.get(personId);
     }
 
-    //將item加入到某人的item list
     public static void addPersonalItem(String personId, ItemObject item){
         ArrayList<ItemObject> itemList = getItemListByPersonId(personId);
         if(itemList == null){
