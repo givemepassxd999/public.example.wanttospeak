@@ -6,9 +6,19 @@ import java.util.ArrayList;
  * Created by givemepass on 2015/5/10.
  */
 public abstract class MulitipleChoice{
-    public int type;
+    protected int type;
 
     public ArrayList<String> itemList;
+
+    protected String choiceName;
+
+    public String getChoiceName() {
+        return choiceName;
+    }
+
+    public void setChoiceName(String choiceName) {
+        this.choiceName = choiceName;
+    }
 
     public MulitipleChoice(){
         type = Constant.TWO_OPTIONS;

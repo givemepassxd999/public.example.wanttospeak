@@ -19,11 +19,11 @@ import android.widget.TextView;
 
 import com.androidquery.AQuery;
 import com.example.givemepass.wanttospeak.R;
+import com.wanttospeak.Combination.CombinationDialog;
 import com.wanttospeak.cache.Constant;
 import com.wanttospeak.cache.DataHelper;
+import com.wanttospeak.items.ItemMakerDialog;
 import com.wanttospeak.items.ItemObject;
-import com.wanttospeak.dialog.ItemMakerDialog;
-import com.wanttospeak.items.ItemDetailListDialog;
 import com.wanttospeak.slidemenu.SlideMenuView;
 
 import java.util.ArrayList;
@@ -77,13 +77,13 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 switch (i) {
                     case 0:
-                        new ItemDetailListDialog(mContext, Constant.TWO_OPTIONS).show();
+                        new CombinationDialog(mContext, Constant.TWO_OPTIONS).show();
                         break;
                     case 1:
-                        new ItemDetailListDialog(mContext, Constant.THREE_OPTIONS).show();
+                        new CombinationDialog(mContext, Constant.THREE_OPTIONS).show();
                         break;
                     case 2:
-                        new ItemDetailListDialog(mContext, Constant.FOUR_OPTIONS).show();
+                        new CombinationDialog(mContext, Constant.FOUR_OPTIONS).show();
                         break;
                 }
             }

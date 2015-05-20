@@ -1,4 +1,4 @@
-package com.wanttospeak.dialog;
+package com.wanttospeak.items;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import com.example.givemepass.wanttospeak.R;
 import com.j256.ormlite.dao.Dao;
+import com.wanttospeak.dialog.CommonDialog;
 import com.wanttospeak.items.ItemObject;
 import com.wanttospeak.dao.DatabaseHelper;
 import com.wanttospeak.util.IdGenerator;

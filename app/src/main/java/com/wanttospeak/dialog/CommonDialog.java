@@ -43,6 +43,12 @@ public abstract class CommonDialog extends Dialog {
         mainLayout = (LinearLayout) findViewById(R.id.dialog_layout);
     }
 
+    protected void setOnNaviActionClickListener(View.OnClickListener listener){
+        if(listener != null) {
+            naviAction.setOnClickListener(listener);
+        }
+    }
+
     protected void setNaviActionVisible(int visible){
         naviAction.setVisibility(visible);
     }
