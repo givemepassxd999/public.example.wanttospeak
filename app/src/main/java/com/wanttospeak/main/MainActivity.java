@@ -18,7 +18,7 @@ import android.widget.TextView;
 
 import com.androidquery.AQuery;
 import com.example.givemepass.wanttospeak.R;
-import com.wanttospeak.Combination.CombinationDialog;
+import com.wanttospeak.combination.CombinationDialog;
 import com.wanttospeak.cache.Constant;
 import com.wanttospeak.cache.DataHelper;
 import com.wanttospeak.dao.DatabaseHelper;

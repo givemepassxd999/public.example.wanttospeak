@@ -1,4 +1,4 @@
-package com.wanttospeak.Combination;
+package com.wanttospeak.combination;
 
 import android.content.Context;
 
