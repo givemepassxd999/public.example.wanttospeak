@@ -33,9 +33,11 @@ public class ItemListDialog extends CommonDialog{
         super(context);
         setContextView(R.layout.item_list_dialog);
         mListView = (ListView) findViewById(R.id.item_list);
+
+        itemList = MyItemList.getItemListByPersonId(DataHelper.getCurrentPersonId());
         mItemListAdapter = new ItemListAdapter();
         mListView.setAdapter(mItemListAdapter);
-        itemList = MyItemList.getItemListByPersonId(DataHelper.getCurrentPersonId());
+
         setNaviActionIcon(R.drawable.add_item);
         setNaviActionVisible(View.VISIBLE);
         setOnNaviActionClickListener(new View.OnClickListener() {

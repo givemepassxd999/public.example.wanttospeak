@@ -21,11 +21,9 @@ import com.example.givemepass.wanttospeak.R;
 import com.wanttospeak.Combination.CombinationDialog;
 import com.wanttospeak.cache.Constant;
 import com.wanttospeak.cache.DataHelper;
-import com.wanttospeak.cache.MyItemList;
 import com.wanttospeak.dao.DatabaseHelper;
 import com.wanttospeak.items.ItemListDialog;
 import com.wanttospeak.items.ItemMakerDialog;
-import com.wanttospeak.items.ItemObject;
 import com.wanttospeak.slidemenu.SlideMenuView;
 import com.wanttospeak.util.NoticeCenter;
 
@@ -47,9 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
         //person id
         DataHelper.setCurrentPersonId("123");
-        
-        ItemObject mItemObject = new ItemObject();
-        MyItemList.addPersonalItem(DataHelper.getCurrentPersonId(), mItemObject);
+
         aq = new AQuery(this);
         mContext = this;
         initView();

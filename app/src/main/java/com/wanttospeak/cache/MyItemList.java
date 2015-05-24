@@ -14,6 +14,8 @@ public class MyItemList {
 
     private static MyItemList mInstance;
 
+    private HashMap<String, ArrayList<ItemObject>> personalItemList;
+
     public static MyItemList getInstance(){
         if(null == mInstance){
             mInstance = new MyItemList();
@@ -24,8 +26,6 @@ public class MyItemList {
     private MyItemList(){
         personalItemList = new HashMap<String, ArrayList<ItemObject>>();
     }
-
-    private HashMap<String, ArrayList<ItemObject>> personalItemList;
 
     public static ArrayList<ItemObject> getItemListByPersonId(String personId){
         ArrayList<ItemObject> itemListTmp = getInstance().personalItemList.get(personId);
@@ -54,12 +54,8 @@ public class MyItemList {
         return null;
     }
 
-    public static int getItemCountByPersonId(String personId){
+    public static int getItemCountByPersonId(String personId) {
         return getInstance().personalItemList.get(personId).size();
-    }
-
-    public static ArrayList<ItemObject> getItemList(String personId) {
-        return getInstance().personalItemList.get(personId);
     }
 
     public static void addPersonalItem(String personId, ItemObject item){

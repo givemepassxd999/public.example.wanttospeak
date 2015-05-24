@@ -115,8 +115,8 @@ public class ItemMakerDialog extends CommonDialog {
 
     @Override
     public void dismiss() {
-        NoticeCenter.getInstance().setOnGalleryPictureReady(null);
-        NoticeCenter.getInstance().setOnNewPictureReady(null);
+//        NoticeCenter.getInstance().setOnGalleryPictureReady(null);
+//        NoticeCenter.getInstance().setOnNewPictureReady(null);
         super.dismiss();
     }
 
@@ -137,6 +137,8 @@ public class ItemMakerDialog extends CommonDialog {
                 }else {
                     // save item name
                     item.setItemName(nameTextView.getText().toString());
+                    //save item to cache
+                    MyItemList.addPersonalItem(DataHelper.getCurrentPersonId(), item);
                     // save item to db
                     try {
                         Dao<ItemObject, String> mItemDao = DatabaseHelper.getInstance().getItemDao();
@@ -146,8 +148,7 @@ public class ItemMakerDialog extends CommonDialog {
                                 Toast.LENGTH_SHORT).show();
                         e.printStackTrace();
                     }
-                    //save item to cache
-                    MyItemList.addPersonalItem(DataHelper.getCurrentPersonId(), item);
+
                     NoticeCenter.getInstance().notifySaveNewItem();
                     Toast.makeText(activity, activity.getString(R.string.add_item_success),
                             Toast.LENGTH_SHORT).show();
