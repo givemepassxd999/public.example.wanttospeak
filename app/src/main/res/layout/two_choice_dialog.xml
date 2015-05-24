@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:weightSum="1"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:layout_weight="0.5"
+        android:id="@+id/two_choice_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/personalinfo_frame">
+        <View
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:id="@+id/two_choice_top_item"
+            android:layout_centerInParent="true"
+            android:background="@drawable/add"/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_weight="0.5"
+        android:id="@+id/two_choice_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/personalinfo_frame"
+        >
+        <View
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_centerInParent="true"
+            android:id="@+id/two_choice_bottom_item"
+            android:background="@drawable/add"/>
+    </RelativeLayout>
+</LinearLayout>

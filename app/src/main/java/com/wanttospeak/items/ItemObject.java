@@ -14,6 +14,9 @@ public class ItemObject {
     @DatabaseField(id = true, columnName = "item_id")
     private String itemId;
 
+    @DatabaseField(columnName = "item_name")
+    private String itemName;
+
     @DatabaseField(columnName = "photo_path")
     private String photoPath;
 
@@ -22,6 +25,14 @@ public class ItemObject {
 
     public ItemObject() {
         itemId = IdGenerator.createId();
+    }
+
+    public String getItemName() {
+        return itemName;
+    }
+
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
     }
 
     public String getPhotoPath() {

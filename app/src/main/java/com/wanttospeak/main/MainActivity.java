@@ -1,6 +1,5 @@
 package com.wanttospeak.main;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,9 +21,12 @@ import com.example.givemepass.wanttospeak.R;
 import com.wanttospeak.Combination.CombinationDialog;
 import com.wanttospeak.cache.Constant;
 import com.wanttospeak.cache.DataHelper;
+import com.wanttospeak.dao.DatabaseHelper;
+import com.wanttospeak.items.ItemListDialog;
 import com.wanttospeak.items.ItemMakerDialog;
 import com.wanttospeak.items.ItemObject;
 import com.wanttospeak.slidemenu.SlideMenuView;
+import com.wanttospeak.util.NoticeCenter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -37,12 +39,14 @@ public class MainActivity extends AppCompatActivity {
     private Context mContext;
     private GridView mGridView;
     private BaseAdapter mBaseAdapter;
-    private ItemMakerDialog itemMakerDialog;
+//    private ItemMakerDialog itemMakerDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        DatabaseHelper.init(this);
+
         //person id
         DataHelper.setCurrentPersonId("123");
         
@@ -59,8 +63,7 @@ public class MainActivity extends AppCompatActivity {
         aq.id(R.id.add_item).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                itemMakerDialog = new ItemMakerDialog((Activity) mContext);
-                itemMakerDialog.show();
+                new ItemListDialog(mContext).show();
             }
         });
 
@@ -95,10 +98,12 @@ public class MainActivity extends AppCompatActivity {
         if(resultCode == RESULT_OK) {
             switch (requestCode) {
                 case ItemMakerDialog.REQUEST_TAKE_PHOTO:
-                    itemMakerDialog.notifiNewPictureReady();
+//                    itemMakerDialog.notifiNewPictureReady();
+                    NoticeCenter.getInstance().notifyOnNewPictureReady();
                     break;
                 case ItemMakerDialog.RESULT_LOAD_IMAGE:
-                    itemMakerDialog.notifiGalleryPictureReady(data.getData());
+//                    itemMakerDialog.notifiGalleryPictureReady(data.getData());
+                    NoticeCenter.getInstance().notyfyOnGalleryPictureReady(data.getData());
                     break;
             }
         }

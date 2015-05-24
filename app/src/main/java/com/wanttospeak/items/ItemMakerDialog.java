@@ -23,10 +23,12 @@ import android.widget.Toast;
 
 import com.example.givemepass.wanttospeak.R;
 import com.j256.ormlite.dao.Dao;
-import com.wanttospeak.dialog.CommonDialog;
-import com.wanttospeak.items.ItemObject;
+import com.wanttospeak.cache.DataHelper;
+import com.wanttospeak.cache.MyItemList;
 import com.wanttospeak.dao.DatabaseHelper;
+import com.wanttospeak.dialog.CommonDialog;
 import com.wanttospeak.util.IdGenerator;
+import com.wanttospeak.util.NoticeCenter;
 
 import java.io.File;
 import java.io.IOException;
@@ -52,6 +54,20 @@ public class ItemMakerDialog extends CommonDialog {
         setupPicturePicker();
         setupRecorder();
         setupSaveButton();
+
+        NoticeCenter.getInstance().setOnNewPictureReady(new NoticeCenter.OnNewPictureReadyListener() {
+            @Override
+            public void notifyNewPictureReady() {
+                notifiNewPictureReady();
+            }
+        });
+        NoticeCenter.getInstance().setOnGalleryPictureReady(new NoticeCenter.OnGalleryPictureReadyListener() {
+            @Override
+            public void notifyGalleryPictureReady(Uri uri) {
+                notifiGalleryPictureReady(uri);
+            }
+        });
+
     }
 
     private void setupRecorder() {
@@ -97,6 +113,13 @@ public class ItemMakerDialog extends CommonDialog {
         });
     }
 
+    @Override
+    public void dismiss() {
+        NoticeCenter.getInstance().setOnGalleryPictureReady(null);
+        NoticeCenter.getInstance().setOnNewPictureReady(null);
+        super.dismiss();
+    }
+
     private void setupSaveButton() {
         final Button saveButton = (Button) findViewById(R.id.add_item_button);
         final EditText nameTextView = (EditText) findViewById(R.id.add_item_name);
@@ -112,16 +135,20 @@ public class ItemMakerDialog extends CommonDialog {
                 else if(TextUtils.isEmpty(nameTextView.getText().toString())) {
                     Toast.makeText(activity, "你忘記輸入名稱囉 :)", Toast.LENGTH_SHORT).show();
                 }else {
-                    // save item
-                    DatabaseHelper mDatabaseHelper = new DatabaseHelper(activity);
+                    // save item name
+                    item.setItemName(nameTextView.getText().toString());
+                    // save item to db
                     try {
-                        Dao<ItemObject, String> mItemDao = mDatabaseHelper.getItemDao();
+                        Dao<ItemObject, String> mItemDao = DatabaseHelper.getInstance().getItemDao();
                         mItemDao.create(item);
                     } catch (SQLException e) {
                         Toast.makeText(activity, activity.getString(R.string.add_item_fail),
                                 Toast.LENGTH_SHORT).show();
                         e.printStackTrace();
                     }
+                    //save item to cache
+                    MyItemList.addPersonalItem(DataHelper.getCurrentPersonId(), item);
+                    NoticeCenter.getInstance().notifySaveNewItem();
                     Toast.makeText(activity, activity.getString(R.string.add_item_success),
                             Toast.LENGTH_SHORT).show();
                     dismiss();

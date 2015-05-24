@@ -1,7 +1,9 @@
 package com.wanttospeak.cache;
 
+import com.wanttospeak.dao.DatabaseHelper;
 import com.wanttospeak.items.ItemObject;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -26,7 +28,16 @@ public class MyItemList {
     private HashMap<String, ArrayList<ItemObject>> personalItemList;
 
     public static ArrayList<ItemObject> getItemListByPersonId(String personId){
-        return getInstance().personalItemList.get(personId);
+        ArrayList<ItemObject> itemListTmp = getInstance().personalItemList.get(personId);
+        //if table not exist, get data from db.
+        if(itemListTmp == null){
+            try {
+                itemListTmp = (ArrayList<ItemObject>) DatabaseHelper.getInstance().getItemDao().queryForAll();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return itemListTmp;
     }
 
     public static ItemObject getItemObjByPersonIdAndIndex(String personId, int itemListIndex){

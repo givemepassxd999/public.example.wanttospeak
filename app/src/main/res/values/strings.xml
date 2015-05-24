@@ -18,5 +18,8 @@
     <string name="three_option">三選一</string>
     <string name="four_option">四選一</string>
     <string name="add_item_success">新增成功</string>
-    <string name="add_item_fail">新增成功</string>
+    <string name="add_item_fail">新增失敗</string>
+    <string name="select_from_list">從清單選取</string>
+    <string name="add_new_item">新增項目</string>
+    <string name="select_item">選取項目</string>
 </resources>

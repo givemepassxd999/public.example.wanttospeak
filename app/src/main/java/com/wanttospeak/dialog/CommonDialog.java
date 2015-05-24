@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.example.givemepass.wanttospeak.R;
 
 public abstract class CommonDialog extends Dialog {
-    private Context mContext;
+    protected Context mContext;
     private View naviBar;
 
     private TextView naviBackText;

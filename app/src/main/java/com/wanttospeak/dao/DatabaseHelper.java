@@ -26,6 +26,18 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
     private volatile boolean isOpen = true;
 
+    public static DatabaseHelper mDatabaseHelper;
+
+    public static void init(Context context){
+        if(mDatabaseHelper == null){
+            mDatabaseHelper = new DatabaseHelper(context);
+        }
+    }
+
+    public static DatabaseHelper getInstance(){
+        return mDatabaseHelper;
+    }
+
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -58,9 +70,9 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     }
 
     public Dao<ItemObject, String> getItemDao() throws SQLException {
-        if (itemObjectDao == null) {
-            itemObjectDao = getDao(ItemObject.class);
+        if (mDatabaseHelper.itemObjectDao == null) {
+            mDatabaseHelper.itemObjectDao = getDao(ItemObject.class);
         }
-        return itemObjectDao;
+        return mDatabaseHelper.itemObjectDao;
     }
 }
