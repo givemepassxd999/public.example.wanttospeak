@@ -1,7 +1,6 @@
 package com.wanttospeak.items;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,7 +60,6 @@ public class ItemListDialog extends CommonDialog{
         @Override
         public int getCount() {
             if(itemList != null){
-                Log.e("!!<item size:", ""+itemList.size());
                 return itemList.size();
             } else {
                 return 0;

@@ -16,6 +16,13 @@
         <dex dex="C:\Users\givemepass\AndroidStudioProjects\wanttospeak\app\build\intermediates\pre-dexed\debug\classes-e18991fd7bf81fd23f3d19e9caf7261a04f6d5b5.jar" />
     </item>
     <item
+        jar="C:\Users\givemepass\.gradle\caches\modules-2\files-2.1\com.j256.ormlite\ormlite-android\4.48\afa06f539a4026c10b247386312aa67404b80a16\ormlite-android-4.48.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="afa06f539a4026c10b247386312aa67404b80a16">
+        <dex dex="C:\Users\givemepass\AndroidStudioProjects\wanttospeak\app\build\intermediates\pre-dexed\debug\ormlite-android-4.48-2fe41e1804f3bd7d5bdd94952169376b2bacad7c.jar" />
+    </item>
+    <item
         jar="C:\Users\givemepass\AndroidStudioProjects\wanttospeak\app\libs\android-query.0.26.8.jar"
         jumboMode="false"
         revision="22.0.1"
@@ -35,6 +42,13 @@
         revision="22.0.1"
         sha1="a3ff3c506644c820eb2bdf06e8339f72be578551">
         <dex dex="C:\Users\givemepass\AndroidStudioProjects\wanttospeak\app\build\intermediates\pre-dexed\debug\classes-bec497126addebce3f18c0b780a030922d47eb0a.jar" />
+    </item>
+    <item
+        jar="C:\Users\givemepass\.gradle\caches\modules-2\files-2.1\com.j256.ormlite\ormlite-core\4.48\e579bd2905d0399af5029aaaf9817d5fa0ca88a5\ormlite-core-4.48.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="e579bd2905d0399af5029aaaf9817d5fa0ca88a5">
+        <dex dex="C:\Users\givemepass\AndroidStudioProjects\wanttospeak\app\build\intermediates\pre-dexed\debug\ormlite-core-4.48-ab0ae0d050afba707c3bb1d1196eef41d31dc69d.jar" />
     </item>
 
 </items>

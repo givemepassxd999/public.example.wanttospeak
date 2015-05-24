@@ -11,6 +11,7 @@
     <string name="save">儲存</string>
     <string name="add_member_name">請輸入名字</string>
     <string name="add_item_name">請輸入項目名稱</string>
+    <string name="add_combination_name">請輸入組合名稱</string>
     <string name="picture_chooser_name">請選擇相片來源</string>
     <string name="gallery">相簿</string>
     <string name="take_picture">拍照</string>

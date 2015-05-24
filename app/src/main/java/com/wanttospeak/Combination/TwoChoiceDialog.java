@@ -19,7 +19,9 @@ public class TwoChoiceDialog extends CommonDialog{
         super(context);
         mContext = context;
         setContextView(R.layout.two_choice_dialog);
-        addNewTopItem = findViewById(R.id.two_choice_top_item);
+//        setNaviActionIcon(R.drawable.item_save);
+//        setNaviActionVisible(View.VISIBLE);
+        addNewTopItem = findViewById(R.id.two_choice_left);
         addNewTopItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
