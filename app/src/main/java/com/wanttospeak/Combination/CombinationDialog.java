@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.example.givemepass.wanttospeak.R;
 import com.wanttospeak.cache.Constant;
-import com.wanttospeak.cache.MulitipleChoice;
+import com.wanttospeak.cache.MultipleChoice;
 import com.wanttospeak.cache.MyCombination;
 import com.wanttospeak.dialog.CommonDialog;
 
@@ -26,7 +26,7 @@ public class CombinationDialog extends CommonDialog{
 
     private ListView mListView;
 
-    private ArrayList<MulitipleChoice> combinationList;
+    private ArrayList<MultipleChoice> combinationList;
     public CombinationDialog(Context context, final int type) {
         super(context);
         mContext = context;

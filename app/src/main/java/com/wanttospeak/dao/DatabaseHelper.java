@@ -9,7 +9,6 @@ import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 import com.wanttospeak.cache.DataHelper;
-import com.wanttospeak.items.ItemObject;
 
 import java.sql.SQLException;
 
@@ -22,7 +21,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
     private static final int DATABASE_VERSION = 1;
 
-    private Dao<ItemObject, String> itemObjectDao = null;
+    private Dao<ItemDao, String> itemObjectDao = null;
 
     private volatile boolean isOpen = true;
 
@@ -45,7 +44,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase database, ConnectionSource connectionSource) {
         try {
-            TableUtils.createTable(connectionSource, ItemObject.class);
+            TableUtils.createTable(connectionSource, ItemDao.class);
         } catch (SQLException e) {
             Log.e(DataHelper.class.getName(), "create table fail.", e);
             e.printStackTrace();
@@ -55,7 +54,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase database, ConnectionSource connectionSource, int oldVersion, int newVersion) {
         try {
-            TableUtils.dropTable(connectionSource, ItemObject.class, true);
+            TableUtils.dropTable(connectionSource, ItemDao.class, true);
             onCreate(database, connectionSource);
         } catch (SQLException e) {
             Log.e(DataHelper.class.getName(), "create table fail.", e);
@@ -69,9 +68,9 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         itemObjectDao = null;
     }
 
-    public Dao<ItemObject, String> getItemDao() throws SQLException {
+    public Dao<ItemDao, String> getItemDao() throws SQLException {
         if (mDatabaseHelper.itemObjectDao == null) {
-            mDatabaseHelper.itemObjectDao = getDao(ItemObject.class);
+            mDatabaseHelper.itemObjectDao = getDao(ItemDao.class);
         }
         return mDatabaseHelper.itemObjectDao;
     }

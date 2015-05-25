@@ -1,4 +1,4 @@
-package com.wanttospeak.items;
+package com.wanttospeak.dao;
 
 
 import com.j256.ormlite.field.DatabaseField;
@@ -9,7 +9,7 @@ import com.wanttospeak.util.IdGenerator;
  * Created by givemepass on 2015/5/7.
  */
 @DatabaseTable(tableName = "item_obj")
-public class ItemObject {
+public class ItemDao {
 
     @DatabaseField(id = true, columnName = "item_id")
     private String itemId;
@@ -23,7 +23,7 @@ public class ItemObject {
     @DatabaseField(columnName = "record_path")
     private String recordPath;
 
-    public ItemObject() {
+    public ItemDao() {
         itemId = IdGenerator.createId();
     }
 

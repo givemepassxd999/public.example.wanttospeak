@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.example.givemepass.wanttospeak.R;
 import com.wanttospeak.cache.DataHelper;
 import com.wanttospeak.cache.MyItemList;
+import com.wanttospeak.dao.ItemDao;
 import com.wanttospeak.dialog.CommonDialog;
 import com.wanttospeak.main.MainActivity;
 import com.wanttospeak.util.NoticeCenter;
@@ -24,7 +25,7 @@ public class ItemListDialog extends CommonDialog{
 
     private ListView mListView;
 
-    private ArrayList<ItemObject> itemList;
+    private ArrayList<ItemDao> itemList;
 
     private ItemListAdapter mItemListAdapter;
 

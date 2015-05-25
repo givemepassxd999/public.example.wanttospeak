@@ -1,7 +1,6 @@
 package com.wanttospeak.items;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -10,7 +9,7 @@ import android.widget.ListView;
 import com.example.givemepass.wanttospeak.R;
 import com.wanttospeak.cache.Constant;
 import com.wanttospeak.cache.DataHelper;
-import com.wanttospeak.cache.MulitipleChoice;
+import com.wanttospeak.cache.MultipleChoice;
 import com.wanttospeak.cache.MyCombination;
 import com.wanttospeak.dialog.CommonDialog;
 
@@ -61,7 +60,7 @@ public class ItemDetailListDialog extends CommonDialog{
     private class ItemDetailListAdapter extends BaseAdapter{
         @Override
         public int getCount() {
-            ArrayList<MulitipleChoice> list = MyCombination.getItemsCombinationList(DataHelper.getCurrentPersonId(), type);
+            ArrayList<MultipleChoice> list = MyCombination.getItemsCombinationList(DataHelper.getCurrentPersonId(), type);
             if(null != list) {
                 return list.size();
             } else{

@@ -1,7 +1,7 @@
 package com.wanttospeak.cache;
 
 import com.wanttospeak.dao.DatabaseHelper;
-import com.wanttospeak.items.ItemObject;
+import com.wanttospeak.dao.ItemDao;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -14,7 +14,7 @@ public class MyItemList {
 
     private static MyItemList mInstance;
 
-    private HashMap<String, ArrayList<ItemObject>> personalItemList;
+    private HashMap<String, ArrayList<ItemDao>> personalItemList;
 
     public static MyItemList getInstance(){
         if(null == mInstance){
@@ -24,15 +24,15 @@ public class MyItemList {
     }
 
     private MyItemList(){
-        personalItemList = new HashMap<String, ArrayList<ItemObject>>();
+        personalItemList = new HashMap<String, ArrayList<ItemDao>>();
     }
 
-    public static ArrayList<ItemObject> getItemListByPersonId(String personId){
-        ArrayList<ItemObject> itemListTmp = getInstance().personalItemList.get(personId);
+    public static ArrayList<ItemDao> getItemListByPersonId(String personId){
+        ArrayList<ItemDao> itemListTmp = getInstance().personalItemList.get(personId);
         //if table not exist, get data from db.
         if(itemListTmp == null){
             try {
-                itemListTmp = (ArrayList<ItemObject>) DatabaseHelper.getInstance().getItemDao().queryForAll();
+                itemListTmp = (ArrayList<ItemDao>) DatabaseHelper.getInstance().getItemDao().queryForAll();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -40,13 +40,13 @@ public class MyItemList {
         return itemListTmp;
     }
 
-    public static ItemObject getItemObjByPersonIdAndIndex(String personId, int itemListIndex){
+    public static ItemDao getItemObjByPersonIdAndIndex(String personId, int itemListIndex){
         return getInstance().personalItemList.get(personId).get(itemListIndex);
     }
 
-    public static ItemObject getItemObjByPersonIdAndItemId(String personId, String itemId){
-        ArrayList<ItemObject> itemList = getInstance().personalItemList.get(personId);
-        for(ItemObject item : itemList){
+    public static ItemDao getItemObjByPersonIdAndItemId(String personId, String itemId){
+        ArrayList<ItemDao> itemList = getInstance().personalItemList.get(personId);
+        for(ItemDao item : itemList){
             if(item.getItemId().equals(itemId)){
                 return item;
             }
@@ -58,10 +58,10 @@ public class MyItemList {
         return getInstance().personalItemList.get(personId).size();
     }
 
-    public static void addPersonalItem(String personId, ItemObject item){
-        ArrayList<ItemObject> itemList = getItemListByPersonId(personId);
+    public static void addPersonalItem(String personId, ItemDao item){
+        ArrayList<ItemDao> itemList = getItemListByPersonId(personId);
         if(itemList == null){
-            itemList = new ArrayList<ItemObject>();
+            itemList = new ArrayList<ItemDao>();
         }
         itemList.add(item);
         getInstance().personalItemList.put(personId, itemList);

@@ -26,6 +26,7 @@ import com.j256.ormlite.dao.Dao;
 import com.wanttospeak.cache.DataHelper;
 import com.wanttospeak.cache.MyItemList;
 import com.wanttospeak.dao.DatabaseHelper;
+import com.wanttospeak.dao.ItemDao;
 import com.wanttospeak.dialog.CommonDialog;
 import com.wanttospeak.util.IdGenerator;
 import com.wanttospeak.util.NoticeCenter;
@@ -40,7 +41,7 @@ public class ItemMakerDialog extends CommonDialog {
     private Activity activity;
     private File photoFile;
     private File recordFile;
-    private ItemObject item;
+    private ItemDao item;
     private MediaRecorder mediaRecorder;
 
     public ItemMakerDialog(Activity activity) {
@@ -48,7 +49,7 @@ public class ItemMakerDialog extends CommonDialog {
         this.activity = activity;
         setContextView(R.layout.add_new_item);
 
-        item = new ItemObject();
+        item = new ItemDao();
 
         setupRecordFile();
         setupPicturePicker();
@@ -141,7 +142,7 @@ public class ItemMakerDialog extends CommonDialog {
                     MyItemList.addPersonalItem(DataHelper.getCurrentPersonId(), item);
                     // save item to db
                     try {
-                        Dao<ItemObject, String> mItemDao = DatabaseHelper.getInstance().getItemDao();
+                        Dao<ItemDao, String> mItemDao = DatabaseHelper.getInstance().getItemDao();
                         mItemDao.create(item);
                     } catch (SQLException e) {
                         Toast.makeText(activity, activity.getString(R.string.add_item_fail),
