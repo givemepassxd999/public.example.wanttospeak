@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -29,6 +30,16 @@ public class ItemListDialog extends CommonDialog{
 
     private ItemListAdapter mItemListAdapter;
 
+    private OnChoiceCompleteListener mOnChoiceCompleteListener;
+
+    public interface OnChoiceCompleteListener{
+        public void onChoiceCompleted(ItemDao item);
+    }
+
+    public void setOnChoiceCompleteListener(OnChoiceCompleteListener listener){
+        mOnChoiceCompleteListener = listener;
+    }
+
     public ItemListDialog(Context context) {
         super(context);
         setContextView(R.layout.item_list_dialog);
@@ -43,18 +54,27 @@ public class ItemListDialog extends CommonDialog{
         setOnNaviActionClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ItemMakerDialog itemMakerDialog = new ItemMakerDialog((MainActivity) mContext);
-                itemMakerDialog.show();
+            ItemMakerDialog itemMakerDialog = new ItemMakerDialog((MainActivity) mContext);
+            itemMakerDialog.show();
             }
         });
         NoticeCenter.getInstance().setOnSaveNewItemListener(new NoticeCenter.OnSaveNewItemListener() {
             @Override
             public void notifySaveNewItem() {
-                itemList = MyItemList.getItemListByPersonId(DataHelper.getCurrentPersonId());
-                mItemListAdapter.notifyDataSetChanged();
+            itemList = MyItemList.getItemListByPersonId(DataHelper.getCurrentPersonId());
+            mItemListAdapter.notifyDataSetChanged();
             }
         });
 
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+            if(mOnChoiceCompleteListener != null){
+                mOnChoiceCompleteListener.onChoiceCompleted(itemList.get(i));
+                dismiss();
+            }
+            }
+        });
     }
 
     private class ItemListAdapter extends BaseAdapter{

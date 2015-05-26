@@ -1,8 +1,7 @@
 package com.wanttospeak.cache;
 
 import com.j256.ormlite.field.DatabaseField;
-
-import java.util.ArrayList;
+import com.wanttospeak.util.IdGenerator;
 
 /**
  * Created by givemepass on 2015/5/10.
@@ -12,7 +11,7 @@ public abstract class MultipleChoice {
     protected int type;
 
     @DatabaseField(columnName = "item_list_json")
-    public ArrayList<String> itemList;
+    public String[] itemList;
 
     @DatabaseField(columnName = "choice_name")
     protected String choiceName;
@@ -29,9 +28,12 @@ public abstract class MultipleChoice {
     }
 
     public MultipleChoice(){
+        combitnationId = IdGenerator.createId();
         type = Constant.TWO_OPTIONS;
-        itemList = new ArrayList<String>();
+        initArray();
     }
+
+    protected abstract void initArray();
 
     public int getType() {
         return type;
@@ -39,12 +41,6 @@ public abstract class MultipleChoice {
 
     public void setType(int type) {
         this.type = type;
-    }
-
-    public void addItemId(String itemId){
-        if(itemId != null){
-            itemList.add(itemId);
-        }
     }
 
     public void setCombitnationId(String combitnationId){

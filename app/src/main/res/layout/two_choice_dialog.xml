@@ -19,11 +19,11 @@
             android:gravity="center"
             android:layout_height="200dp"
             android:background="@drawable/personalinfo_frame">
-            <View
+            <ImageView
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:id="@+id/two_choice_left_item"
-                android:background="@drawable/add"/>
+                android:src="@drawable/add"/>
         </RelativeLayout>
         <RelativeLayout
             android:id="@+id/two_choice_right"
@@ -34,11 +34,11 @@
             android:gravity="center"
             android:background="@drawable/personalinfo_frame"
             >
-            <View
+            <ImageView
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:id="@+id/two_choice_right_item"
-                android:background="@drawable/add" />
+                android:src="@drawable/add" />
         </RelativeLayout>
     </LinearLayout>
     <EditText
