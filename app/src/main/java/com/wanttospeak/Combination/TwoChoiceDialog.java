@@ -12,16 +12,18 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.givemepass.wanttospeak.R;
+import com.wanttospeak.cache.DataHelper;
+import com.wanttospeak.cache.MyCombination;
 import com.wanttospeak.dao.ItemDao;
 import com.wanttospeak.dao.TwoChoiceDao;
-import com.wanttospeak.dialog.CommonDialog;
 import com.wanttospeak.items.ItemListDialog;
 import com.wanttospeak.util.ImageHelper;
 
 /**
  * Created by givemepass on 2015/5/20.
  */
-public class TwoChoiceDialog extends CommonDialog {
+public class TwoChoiceDialog extends CombinationListDialog {
+
 	private View addNewLeftItem;
 
 	private ImageView leftItemView;
@@ -61,10 +63,19 @@ public class TwoChoiceDialog extends CommonDialog {
 		saveButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-			if (TextUtils.isEmpty(combinationText.getText())) {
-				Toast.makeText(mContext, R.string.add_combination_name, Toast.LENGTH_SHORT).show();
-				return;
-			}
+				if (TextUtils.isEmpty(combinationText.getText())) {
+					Toast.makeText(mContext, R.string.add_combination_name, Toast.LENGTH_SHORT).show();
+					return;
+				} else{
+					twoChoice.setChoiceName(combinationText.getText().toString());
+				}
+
+				Toast.makeText(mContext, R.string.save_item_combination_success, Toast.LENGTH_SHORT).show();
+				MyCombination.putItemCombination(DataHelper.getCurrentPersonId(), twoChoice);
+				if(mOnSaveFinishedListener != null){
+					mOnSaveFinishedListener.OnSaveFinished();
+				}
+				dismiss();
 			}
 		});
 
@@ -80,43 +91,42 @@ public class TwoChoiceDialog extends CommonDialog {
 			AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
 			builder.setTitle(mContext.getString(R.string.select_item))
 				.setItems(new String[]{mContext.getString(R.string.select_from_list),
-						mContext.getString(R.string.add_new_item)}, new OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						switch (which) {
-							case 0:
-								ItemListDialog mItemListDialog = new ItemListDialog(mContext);
-								mItemListDialog.setOnChoiceCompleteListener(new ItemListDialog.OnChoiceCompleteListener() {
-									@Override
-									public void onChoiceCompleted(ItemDao item) {
+					mContext.getString(R.string.add_new_item)}, new OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					switch (which) {
+						case 0:
+							ItemListDialog mItemListDialog = new ItemListDialog(mContext);
+							mItemListDialog.setOnChoiceCompleteListener(new ItemListDialog.OnChoiceCompleteListener() {
+								@Override
+								public void onChoiceCompleted(ItemDao item) {
 
-										String itemPicPath = item.getPhotoPath();
-										try {
-											Bitmap b = ImageHelper.resize(itemPicPath, 200);
-											switch (position){
-												case LEFT:
-													twoChoice.setLeftItemId(item.getItemId());
-													leftItemView.setImageBitmap(b);
-													break;
-												case RIGHT:
-													twoChoice.setRightItemId(item.getItemId());
-													rightItemView.setImageBitmap(b);
-													break;
-											}
-
-										} catch (Exception e) {
-											e.printStackTrace();
-										}
+								String itemPicPath = item.getPhotoPath();
+								try {
+									Bitmap b = ImageHelper.resize(itemPicPath, 200);
+									switch (position){
+										case LEFT:
+											twoChoice.setLeftItemId(item.getItemId());
+											leftItemView.setImageBitmap(b);
+											break;
+										case RIGHT:
+											twoChoice.setRightItemId(item.getItemId());
+											rightItemView.setImageBitmap(b);
+											break;
 									}
-								});
-								mItemListDialog.show();
-								break;
-							case 1:
 
-								break;
-						}
+								} catch (Exception e) {
+									e.printStackTrace();
+								}
+								}
+							});
+							mItemListDialog.show();
+							break;
+						case 1:
+
+							break;
 					}
-				});
+					}});
 			builder.show();
 		}
 	}

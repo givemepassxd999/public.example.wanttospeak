@@ -19,6 +19,7 @@ public abstract class CommonDialog extends Dialog {
     private View naviAction;
 
     private LinearLayout mainLayout;
+
     public CommonDialog(Context context) {
         super(context, android.R.style.Theme_Light);
         mContext = context;

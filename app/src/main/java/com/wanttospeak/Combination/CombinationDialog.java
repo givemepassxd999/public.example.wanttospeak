@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.example.givemepass.wanttospeak.R;
 import com.wanttospeak.cache.Constant;
+import com.wanttospeak.cache.DataHelper;
 import com.wanttospeak.cache.MultipleChoice;
 import com.wanttospeak.cache.MyCombination;
 import com.wanttospeak.dialog.CommonDialog;
@@ -27,6 +28,9 @@ public class CombinationDialog extends CommonDialog{
     private ListView mListView;
 
     private ArrayList<MultipleChoice> combinationList;
+
+    private CombinationListAdapter mCombinationListAdapter;
+
     public CombinationDialog(Context context, final int type) {
         super(context);
         mContext = context;
@@ -34,25 +38,37 @@ public class CombinationDialog extends CommonDialog{
         setContextView(R.layout.combination_list);
         setNaviActionVisible(View.VISIBLE);
         setNaviActionIcon(R.drawable.add);
-        setOnNaviActionClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                switch (type) {
-                    case Constant.TWO_OPTIONS:
-                        new TwoChoiceDialog(mContext, type, null).show();
-                        break;
-                    case Constant.THREE_OPTIONS:
-                        new ThreeChoiceDialog(mContext, type, null).show();
-                        break;
-                    case Constant.FOUR_OPTIONS:
-                        new FourChoiceDialog(mContext, type, null).show();
-                        break;
-                }
-            }
-        });
+
         combinationList = MyCombination.getItemsCombinationList("123", type);
 
         mListView = (ListView) findViewById(R.id.combination_list);
+        mCombinationListAdapter = new CombinationListAdapter();
+        mListView.setAdapter(mCombinationListAdapter);
+
+        setOnNaviActionClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+            switch (type) {
+                case Constant.TWO_OPTIONS:
+                    TwoChoiceDialog mTwoChoiceDialog = new TwoChoiceDialog(mContext, type, null);
+                    mTwoChoiceDialog.setOnSaveFinishedListener(new CombinationListDialog.OnSaveFinishedListener() {
+                        @Override
+                        public void OnSaveFinished() {
+                            combinationList = MyCombination.getItemsCombinationList(DataHelper.getCurrentPersonId(), type);
+                            mCombinationListAdapter.notifyDataSetChanged();
+                        }
+                    });
+                    mTwoChoiceDialog.show();
+                    break;
+                case Constant.THREE_OPTIONS:
+                    new ThreeChoiceDialog(mContext, type, null).show();
+                    break;
+                case Constant.FOUR_OPTIONS:
+                    new FourChoiceDialog(mContext, type, null).show();
+                    break;
+            }
+            }
+        });
 
 
     }
@@ -60,7 +76,12 @@ public class CombinationDialog extends CommonDialog{
     private class CombinationListAdapter extends BaseAdapter{
         @Override
         public int getCount() {
-            return combinationList.size();
+
+            if(combinationList != null && combinationList.size() > 0) {
+                return combinationList.size();
+            } else{
+                return 0;
+            }
         }
 
         @Override

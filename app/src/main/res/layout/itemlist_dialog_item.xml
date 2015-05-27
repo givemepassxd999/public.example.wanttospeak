@@ -9,6 +9,5 @@
         android:paddingLeft="10dp"
         android:gravity="center_vertical"
         android:textColor="@color/black"
-        android:text="aaa"
         android:id="@+id/itemlist_dialog_item"/>
 </RelativeLayout>

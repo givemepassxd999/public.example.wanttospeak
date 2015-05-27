@@ -65,4 +65,5 @@ public class NoticeCenter {
             mOnSaveNewItemListener.notifySaveNewItem();
         }
     }
+
 }

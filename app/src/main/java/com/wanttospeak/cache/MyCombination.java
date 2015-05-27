@@ -1,5 +1,7 @@
 package com.wanttospeak.cache;
 
+import com.wanttospeak.util.Logger;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -42,7 +44,7 @@ public class MyCombination {
         else if(type == Constant.FOUR_OPTIONS){
                 return getInstance().twoOptionCombinationList.get(personId);
         } else{
-            return null;
+            return new ArrayList<MultipleChoice>();
         }
 
     }
@@ -57,7 +59,7 @@ public class MyCombination {
         }
     }
 
-    public static void addItemCombination(String personId, MultipleChoice choice){
+    public static void putItemCombination(String personId, MultipleChoice choice){
         ArrayList<MultipleChoice> mulitipleChoiceList = getInstance().getItemsCombinationList(personId, choice.getType());
         if(mulitipleChoiceList == null){
             mulitipleChoiceList = new ArrayList<MultipleChoice>();
@@ -66,6 +68,7 @@ public class MyCombination {
 
         switch(choice.getType()) {
             case Constant.TWO_OPTIONS:
+                Logger.e("two option");
                 getInstance().twoOptionCombinationList.put(personId, mulitipleChoiceList);
                 break;
             case Constant.THREE_OPTIONS:
