@@ -9,7 +9,7 @@ import android.widget.ListView;
 import com.example.givemepass.wanttospeak.R;
 import com.wanttospeak.cache.Constant;
 import com.wanttospeak.cache.DataHelper;
-import com.wanttospeak.cache.MultipleChoice;
+import com.wanttospeak.dao.MultipleChoiceDao;
 import com.wanttospeak.cache.MyCombination;
 import com.wanttospeak.dialog.CommonDialog;
 
@@ -60,7 +60,7 @@ public class ItemDetailListDialog extends CommonDialog{
     private class ItemDetailListAdapter extends BaseAdapter{
         @Override
         public int getCount() {
-            ArrayList<MultipleChoice> list = MyCombination.getItemsCombinationList(DataHelper.getCurrentPersonId(), type);
+            ArrayList<MultipleChoiceDao> list = MyCombination.getItemsCombinationList(DataHelper.getCurrentPersonId(), type);
             if(null != list) {
                 return list.size();
             } else{

@@ -1,13 +1,11 @@
 package com.wanttospeak.dao;
 
-import com.wanttospeak.cache.MultipleChoice;
-
 /**
  * Created by givemepass on 2015/5/25.
  */
 
 
-public class TwoChoiceDao extends MultipleChoice{
+public class TwoChoiceDao extends MultipleChoiceDao {
 
     public TwoChoiceDao() {
         super();

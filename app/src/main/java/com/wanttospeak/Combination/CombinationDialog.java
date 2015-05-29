@@ -11,9 +11,10 @@ import android.widget.TextView;
 import com.example.givemepass.wanttospeak.R;
 import com.wanttospeak.cache.Constant;
 import com.wanttospeak.cache.DataHelper;
-import com.wanttospeak.cache.MultipleChoice;
 import com.wanttospeak.cache.MyCombination;
+import com.wanttospeak.dao.MultipleChoiceDao;
 import com.wanttospeak.dialog.CommonDialog;
+import com.wanttospeak.util.Logger;
 
 import java.util.ArrayList;
 
@@ -27,7 +28,7 @@ public class CombinationDialog extends CommonDialog{
 
     private ListView mListView;
 
-    private ArrayList<MultipleChoice> combinationList;
+    private ArrayList<MultipleChoiceDao> combinationList;
 
     private CombinationListAdapter mCombinationListAdapter;
 
@@ -78,8 +79,10 @@ public class CombinationDialog extends CommonDialog{
         public int getCount() {
 
             if(combinationList != null && combinationList.size() > 0) {
+                Logger.e("combinationList not null");
                 return combinationList.size();
             } else{
+                Logger.e("combinationList is null");
                 return 0;
             }
         }

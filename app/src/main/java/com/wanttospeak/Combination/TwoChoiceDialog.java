@@ -14,7 +14,7 @@ import android.widget.Toast;
 import com.example.givemepass.wanttospeak.R;
 import com.j256.ormlite.dao.Dao;
 import com.wanttospeak.cache.DataHelper;
-import com.wanttospeak.cache.MultipleChoice;
+import com.wanttospeak.dao.MultipleChoiceDao;
 import com.wanttospeak.cache.MyCombination;
 import com.wanttospeak.dao.DatabaseHelper;
 import com.wanttospeak.dao.ItemDao;
@@ -41,7 +41,7 @@ public class TwoChoiceDialog extends CombinationListDialog {
 
 	private Button saveButton;
 
-	private MultipleChoice twoChoice;
+	private MultipleChoiceDao twoChoice;
 
 	private EditText combinationText;
 
@@ -84,7 +84,7 @@ public class TwoChoiceDialog extends CombinationListDialog {
 				Toast.makeText(mContext, R.string.save_item_combination_success, Toast.LENGTH_SHORT).show();
 				MyCombination.putItemCombination(DataHelper.getCurrentPersonId(), twoChoice);
 				try {
-					Dao<MultipleChoice, String> twoChoiceObjectDao = DatabaseHelper.getInstance().getMultipleChoiceDao();
+					Dao<MultipleChoiceDao, String> twoChoiceObjectDao = DatabaseHelper.getInstance().getMultipleChoiceDao();
 					twoChoiceObjectDao.create(twoChoice);
 
 				} catch (SQLException e) {

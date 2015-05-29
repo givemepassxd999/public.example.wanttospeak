@@ -1,7 +1,10 @@
 package com.wanttospeak.cache;
 
+import com.wanttospeak.dao.DatabaseHelper;
+import com.wanttospeak.dao.MultipleChoiceDao;
 import com.wanttospeak.util.Logger;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -10,20 +13,20 @@ import java.util.HashMap;
  */
 public class MyCombination {
 
-    private HashMap<String, ArrayList<MultipleChoice>> twoOptionCombinationList;
+    private HashMap<String, ArrayList<MultipleChoiceDao>> twoOptionCombinationList;
 
 
-    private HashMap<String, ArrayList<MultipleChoice>> threeOptionCombinationList;
+    private HashMap<String, ArrayList<MultipleChoiceDao>> threeOptionCombinationList;
 
 
-    private HashMap<String, ArrayList<MultipleChoice>> fourOptionCombinationList;
+    private HashMap<String, ArrayList<MultipleChoiceDao>> fourOptionCombinationList;
 
     private static MyCombination mInstance;
 
     private MyCombination(){
-        twoOptionCombinationList = new HashMap<String, ArrayList<MultipleChoice>>();
-        threeOptionCombinationList = new HashMap<String, ArrayList<MultipleChoice>>();
-        fourOptionCombinationList = new HashMap<String, ArrayList<MultipleChoice>>();
+        twoOptionCombinationList = new HashMap<String, ArrayList<MultipleChoiceDao>>();
+        threeOptionCombinationList = new HashMap<String, ArrayList<MultipleChoiceDao>>();
+        fourOptionCombinationList = new HashMap<String, ArrayList<MultipleChoiceDao>>();
     }
 
     public static MyCombination getInstance(){
@@ -34,24 +37,37 @@ public class MyCombination {
     }
 
 
-    public static ArrayList<MultipleChoice> getItemsCombinationList(String personId, int type) {
-        if(type == Constant.TWO_OPTIONS) {
-            return getInstance().twoOptionCombinationList.get(personId);
+    public static ArrayList<MultipleChoiceDao> getItemsCombinationList(String personId, int type) {
+        ArrayList<MultipleChoiceDao> multipleChoicesList;
+        switch(type){
+            case Constant.TWO_OPTIONS:
+                multipleChoicesList = getInstance().twoOptionCombinationList.get(personId);
+                if(multipleChoicesList == null){
+                    try {
+                        multipleChoicesList = (ArrayList<MultipleChoiceDao>) DatabaseHelper.getInstance().getMultipleChoiceDao().queryForAll();
+                        Logger.e("query success");
+                    } catch (SQLException e) {
+                        multipleChoicesList = null;
+                        Logger.e("query fail");
+                    }
+                }
+                break;
+            case Constant.THREE_OPTIONS:
+                multipleChoicesList = getInstance().twoOptionCombinationList.get(personId);
+                break;
+            case Constant.FOUR_OPTIONS:
+                multipleChoicesList = getInstance().twoOptionCombinationList.get(personId);
+                break;
+            default:
+                multipleChoicesList = null;
+                break;
         }
-        else if(type == Constant.THREE_OPTIONS) {
-            return getInstance().twoOptionCombinationList.get(personId);
-        }
-        else if(type == Constant.FOUR_OPTIONS){
-                return getInstance().twoOptionCombinationList.get(personId);
-        } else{
-            return new ArrayList<MultipleChoice>();
-        }
-
+        return multipleChoicesList;
     }
 
 
-    public static MultipleChoice getItemsCombination(String personId, int index, int type) {
-        ArrayList<MultipleChoice> choiceList = getItemsCombinationList(personId, type);
+    public static MultipleChoiceDao getItemsCombination(String personId, int index, int type) {
+        ArrayList<MultipleChoiceDao> choiceList = getItemsCombinationList(personId, type);
         if(choiceList != null) {
             return choiceList.get(index);
         } else{
@@ -59,10 +75,10 @@ public class MyCombination {
         }
     }
 
-    public static void putItemCombination(String personId, MultipleChoice choice){
-        ArrayList<MultipleChoice> mulitipleChoiceList = getInstance().getItemsCombinationList(personId, choice.getType());
+    public static void putItemCombination(String personId, MultipleChoiceDao choice){
+        ArrayList<MultipleChoiceDao> mulitipleChoiceList = getInstance().getItemsCombinationList(personId, choice.getType());
         if(mulitipleChoiceList == null){
-            mulitipleChoiceList = new ArrayList<MultipleChoice>();
+            mulitipleChoiceList = new ArrayList<MultipleChoiceDao>();
         }
         mulitipleChoiceList.add(choice);
 
