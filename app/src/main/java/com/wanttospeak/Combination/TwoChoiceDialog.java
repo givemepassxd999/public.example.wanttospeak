@@ -12,12 +12,17 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.givemepass.wanttospeak.R;
+import com.j256.ormlite.dao.Dao;
 import com.wanttospeak.cache.DataHelper;
+import com.wanttospeak.cache.MultipleChoice;
 import com.wanttospeak.cache.MyCombination;
+import com.wanttospeak.dao.DatabaseHelper;
 import com.wanttospeak.dao.ItemDao;
 import com.wanttospeak.dao.TwoChoiceDao;
 import com.wanttospeak.items.ItemListDialog;
 import com.wanttospeak.util.ImageHelper;
+
+import java.sql.SQLException;
 
 /**
  * Created by givemepass on 2015/5/20.
@@ -36,7 +41,7 @@ public class TwoChoiceDialog extends CombinationListDialog {
 
 	private Button saveButton;
 
-	private TwoChoiceDao twoChoice;
+	private MultipleChoice twoChoice;
 
 	private EditText combinationText;
 
@@ -66,12 +71,29 @@ public class TwoChoiceDialog extends CombinationListDialog {
 				if (TextUtils.isEmpty(combinationText.getText())) {
 					Toast.makeText(mContext, R.string.add_combination_name, Toast.LENGTH_SHORT).show();
 					return;
+				} else if(((TwoChoiceDao)twoChoice).getRightItemId() == null) {
+					Toast.makeText(mContext, R.string.plz_select_right_item, Toast.LENGTH_SHORT).show();
+					return;
+				} else if(((TwoChoiceDao)twoChoice).getLeftItemId() == null){
+					Toast.makeText(mContext, R.string.plz_select_left_item, Toast.LENGTH_SHORT).show();
+					return;
 				} else{
 					twoChoice.setChoiceName(combinationText.getText().toString());
 				}
 
 				Toast.makeText(mContext, R.string.save_item_combination_success, Toast.LENGTH_SHORT).show();
 				MyCombination.putItemCombination(DataHelper.getCurrentPersonId(), twoChoice);
+				try {
+					Dao<MultipleChoice, String> twoChoiceObjectDao = DatabaseHelper.getInstance().getMultipleChoiceDao();
+					twoChoiceObjectDao.create(twoChoice);
+
+				} catch (SQLException e) {
+					Toast.makeText(mContext, mContext.getString(R.string.add_item_fail),
+							Toast.LENGTH_SHORT).show();
+					e.printStackTrace();
+				}
+				Toast.makeText(mContext, mContext.getString(R.string.add_item_success),
+						Toast.LENGTH_SHORT).show();
 				if(mOnSaveFinishedListener != null){
 					mOnSaveFinishedListener.OnSaveFinished();
 				}
@@ -106,11 +128,11 @@ public class TwoChoiceDialog extends CombinationListDialog {
 									Bitmap b = ImageHelper.resize(itemPicPath, 200);
 									switch (position){
 										case LEFT:
-											twoChoice.setLeftItemId(item.getItemId());
+											((TwoChoiceDao)twoChoice).setLeftItemId(item.getItemId());
 											leftItemView.setImageBitmap(b);
 											break;
 										case RIGHT:
-											twoChoice.setRightItemId(item.getItemId());
+											((TwoChoiceDao)twoChoice).setRightItemId(item.getItemId());
 											rightItemView.setImageBitmap(b);
 											break;
 									}

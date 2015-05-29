@@ -23,6 +23,13 @@
         <dex dex="C:\Users\givemepass\AndroidStudioProjects\wanttospeak\app\build\intermediates\pre-dexed\debug\ormlite-android-4.48-2fe41e1804f3bd7d5bdd94952169376b2bacad7c.jar" />
     </item>
     <item
+        jar="C:\Users\givemepass\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.2.4\a60a5e993c98c864010053cb901b7eab25306568\gson-2.2.4.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="a60a5e993c98c864010053cb901b7eab25306568">
+        <dex dex="C:\Users\givemepass\AndroidStudioProjects\wanttospeak\app\build\intermediates\pre-dexed\debug\gson-2.2.4-8fc21482ed4728ee73e5d9a7e7d73375ae64fbcd.jar" />
+    </item>
+    <item
         jar="C:\Users\givemepass\AndroidStudioProjects\wanttospeak\app\libs\android-query.0.26.8.jar"
         jumboMode="false"
         revision="22.0.1"

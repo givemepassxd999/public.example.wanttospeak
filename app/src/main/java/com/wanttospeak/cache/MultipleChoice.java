@@ -1,16 +1,20 @@
 package com.wanttospeak.cache;
 
+import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
 import com.wanttospeak.util.IdGenerator;
 
 /**
  * Created by givemepass on 2015/5/10.
  */
+@DatabaseTable(tableName = "multi_choice")
 public abstract class MultipleChoice {
+
     @DatabaseField(columnName = "type")
     protected int type;
 
-    @DatabaseField(columnName = "item_list_json")
+    @DatabaseField(dataType = DataType.SERIALIZABLE,  columnName = "item_list_id")
     public String[] itemList;
 
     @DatabaseField(columnName = "choice_name")

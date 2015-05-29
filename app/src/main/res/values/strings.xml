@@ -24,4 +24,6 @@
     <string name="add_new_item">新增項目</string>
     <string name="select_item">選取項目</string>
     <string name="save_item_combination_success">儲存組合成功</string>
+    <string name="plz_select_right_item">請選擇/新增右邊項目</string>
+    <string name="plz_select_left_item">請選擇/新增左邊項目</string>
 </resources>

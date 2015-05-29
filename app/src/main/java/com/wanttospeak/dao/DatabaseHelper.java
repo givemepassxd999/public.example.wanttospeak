@@ -9,6 +9,7 @@ import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 import com.wanttospeak.cache.DataHelper;
+import com.wanttospeak.cache.MultipleChoice;
 
 import java.sql.SQLException;
 
@@ -22,6 +23,8 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     private static final int DATABASE_VERSION = 1;
 
     private Dao<ItemDao, String> itemObjectDao = null;
+
+    private Dao<MultipleChoice, String> twoChoiceObjectDao = null;
 
     private volatile boolean isOpen = true;
 
@@ -45,6 +48,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     public void onCreate(SQLiteDatabase database, ConnectionSource connectionSource) {
         try {
             TableUtils.createTable(connectionSource, ItemDao.class);
+            TableUtils.createTable(connectionSource, MultipleChoice.class);
         } catch (SQLException e) {
             Log.e(DataHelper.class.getName(), "create table fail.", e);
             e.printStackTrace();
@@ -55,6 +59,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     public void onUpgrade(SQLiteDatabase database, ConnectionSource connectionSource, int oldVersion, int newVersion) {
         try {
             TableUtils.dropTable(connectionSource, ItemDao.class, true);
+            TableUtils.dropTable(connectionSource, MultipleChoice.class, true);
             onCreate(database, connectionSource);
         } catch (SQLException e) {
             Log.e(DataHelper.class.getName(), "create table fail.", e);
@@ -73,5 +78,12 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             mDatabaseHelper.itemObjectDao = getDao(ItemDao.class);
         }
         return mDatabaseHelper.itemObjectDao;
+    }
+
+    public Dao<MultipleChoice, String> getMultipleChoiceDao() throws SQLException {
+        if(mDatabaseHelper.twoChoiceObjectDao == null){
+            mDatabaseHelper.twoChoiceObjectDao = getDao(MultipleChoice.class);
+        }
+        return mDatabaseHelper.twoChoiceObjectDao;
     }
 }
