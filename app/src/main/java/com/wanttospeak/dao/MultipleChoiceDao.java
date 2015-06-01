@@ -35,11 +35,23 @@ public class MultipleChoiceDao {
     public MultipleChoiceDao(){
         combitnationId = IdGenerator.createId();
         type = Constant.TWO_OPTIONS;
+        choiceName = "";
         initArray();
+    }
+
+    public void setArrayData(String data, int pos){
+        itemList[pos] = data;
+    }
+
+    public String getArrayData(int pos){
+        return itemList[pos];
     }
 
     protected void initArray(){
         itemList = new String[8];
+        for(String s : itemList){
+            s = "";
+        }
     }
 
     public int getType() {

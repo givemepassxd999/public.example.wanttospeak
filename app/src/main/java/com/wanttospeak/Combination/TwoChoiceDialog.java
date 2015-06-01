@@ -14,11 +14,10 @@ import android.widget.Toast;
 import com.example.givemepass.wanttospeak.R;
 import com.j256.ormlite.dao.Dao;
 import com.wanttospeak.cache.DataHelper;
-import com.wanttospeak.dao.MultipleChoiceDao;
 import com.wanttospeak.cache.MyCombination;
 import com.wanttospeak.dao.DatabaseHelper;
 import com.wanttospeak.dao.ItemDao;
-import com.wanttospeak.dao.TwoChoiceDao;
+import com.wanttospeak.dao.MultipleChoiceDao;
 import com.wanttospeak.items.ItemListDialog;
 import com.wanttospeak.util.ImageHelper;
 
@@ -60,7 +59,7 @@ public class TwoChoiceDialog extends CombinationListDialog {
 
 		saveButton = (Button) findViewById(R.id.two_choice_add_item_button);
 		combinationText = (EditText) findViewById(R.id.two_choice_add_item_name);
-		twoChoice = new TwoChoiceDao();
+		twoChoice = new MultipleChoiceDao();
 
 		addNewLeftItem.setOnClickListener(new MyClickListener(LEFT));
 		addNewRightItem.setOnClickListener(new MyClickListener(RIGHT));
@@ -71,10 +70,10 @@ public class TwoChoiceDialog extends CombinationListDialog {
 				if (TextUtils.isEmpty(combinationText.getText())) {
 					Toast.makeText(mContext, R.string.add_combination_name, Toast.LENGTH_SHORT).show();
 					return;
-				} else if(((TwoChoiceDao)twoChoice).getRightItemId() == null) {
+				} else if(twoChoice.getArrayData(0) == null) {
 					Toast.makeText(mContext, R.string.plz_select_right_item, Toast.LENGTH_SHORT).show();
 					return;
-				} else if(((TwoChoiceDao)twoChoice).getLeftItemId() == null){
+				} else if(twoChoice.getArrayData(1) == null){
 					Toast.makeText(mContext, R.string.plz_select_left_item, Toast.LENGTH_SHORT).show();
 					return;
 				} else{
@@ -128,11 +127,11 @@ public class TwoChoiceDialog extends CombinationListDialog {
 									Bitmap b = ImageHelper.resize(itemPicPath, 200);
 									switch (position){
 										case LEFT:
-											((TwoChoiceDao)twoChoice).setLeftItemId(item.getItemId());
+											twoChoice.setArrayData(item.getItemId(), 0);
 											leftItemView.setImageBitmap(b);
 											break;
 										case RIGHT:
-											((TwoChoiceDao)twoChoice).setRightItemId(item.getItemId());
+											twoChoice.setArrayData(item.getItemId(), 1);
 											rightItemView.setImageBitmap(b);
 											break;
 									}

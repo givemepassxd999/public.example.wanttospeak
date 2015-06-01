@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -14,7 +15,6 @@ import com.wanttospeak.cache.DataHelper;
 import com.wanttospeak.cache.MyCombination;
 import com.wanttospeak.dao.MultipleChoiceDao;
 import com.wanttospeak.dialog.CommonDialog;
-import com.wanttospeak.util.Logger;
 
 import java.util.ArrayList;
 
@@ -40,34 +40,43 @@ public class CombinationDialog extends CommonDialog{
         setNaviActionVisible(View.VISIBLE);
         setNaviActionIcon(R.drawable.add);
 
-        combinationList = MyCombination.getItemsCombinationList("123", type);
+        combinationList = MyCombination.getItemsCombinationList(DataHelper.getCurrentPersonId(), type);
 
         mListView = (ListView) findViewById(R.id.combination_list);
         mCombinationListAdapter = new CombinationListAdapter();
         mListView.setAdapter(mCombinationListAdapter);
 
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                MultipleChoiceDao multipleChoiceDao = combinationList.get(i);
+                if (multipleChoiceDao != null) {
+                    new TwoChoiceDetailDialog(mContext, multipleChoiceDao).show();
+                }
+            }
+        });
         setOnNaviActionClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            switch (type) {
-                case Constant.TWO_OPTIONS:
-                    TwoChoiceDialog mTwoChoiceDialog = new TwoChoiceDialog(mContext, type, null);
-                    mTwoChoiceDialog.setOnSaveFinishedListener(new CombinationListDialog.OnSaveFinishedListener() {
-                        @Override
-                        public void OnSaveFinished() {
-                            combinationList = MyCombination.getItemsCombinationList(DataHelper.getCurrentPersonId(), type);
-                            mCombinationListAdapter.notifyDataSetChanged();
-                        }
-                    });
-                    mTwoChoiceDialog.show();
-                    break;
-                case Constant.THREE_OPTIONS:
-                    new ThreeChoiceDialog(mContext, type, null).show();
-                    break;
-                case Constant.FOUR_OPTIONS:
-                    new FourChoiceDialog(mContext, type, null).show();
-                    break;
-            }
+                switch (type) {
+                    case Constant.TWO_OPTIONS:
+                        TwoChoiceDialog mTwoChoiceDialog = new TwoChoiceDialog(mContext, type, null);
+                        mTwoChoiceDialog.setOnSaveFinishedListener(new CombinationListDialog.OnSaveFinishedListener() {
+                            @Override
+                            public void OnSaveFinished() {
+                                combinationList = MyCombination.getItemsCombinationList(DataHelper.getCurrentPersonId(), type);
+                                mCombinationListAdapter.notifyDataSetChanged();
+                            }
+                        });
+                        mTwoChoiceDialog.show();
+                        break;
+                    case Constant.THREE_OPTIONS:
+                        new ThreeChoiceDialog(mContext, type, null).show();
+                        break;
+                    case Constant.FOUR_OPTIONS:
+                        new FourChoiceDialog(mContext, type, null).show();
+                        break;
+                }
             }
         });
 
@@ -79,10 +88,8 @@ public class CombinationDialog extends CommonDialog{
         public int getCount() {
 
             if(combinationList != null && combinationList.size() > 0) {
-                Logger.e("combinationList not null");
                 return combinationList.size();
             } else{
-                Logger.e("combinationList is null");
                 return 0;
             }
         }

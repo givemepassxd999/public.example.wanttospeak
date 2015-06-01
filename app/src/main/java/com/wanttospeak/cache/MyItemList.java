@@ -1,5 +1,7 @@
 package com.wanttospeak.cache;
 
+import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.stmt.QueryBuilder;
 import com.wanttospeak.dao.DatabaseHelper;
 import com.wanttospeak.dao.ItemDao;
 
@@ -45,10 +47,29 @@ public class MyItemList {
     }
 
     public static ItemDao getItemObjByPersonIdAndItemId(String personId, String itemId){
+        ItemDao item = null;
         ArrayList<ItemDao> itemList = getInstance().personalItemList.get(personId);
-        for(ItemDao item : itemList){
-            if(item.getItemId().equals(itemId)){
-                return item;
+        item = getInstance().getItemDaoFromList(itemList, itemId);
+        if(item == null){
+            try {
+                Dao<ItemDao, String> itemDao = DatabaseHelper.mDatabaseHelper.getItemDao();
+                QueryBuilder<ItemDao, String> builder = itemDao.queryBuilder();
+                builder.where().eq("item_id", itemId);
+                itemList = (ArrayList<ItemDao>) itemDao.query(builder.prepare());
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        item = getInstance().getItemDaoFromList(itemList, itemId);
+        return item;
+    }
+
+    private ItemDao getItemDaoFromList(ArrayList<ItemDao> itemList, String itemId){
+        if(itemList != null) {
+            for (ItemDao i : itemList) {
+                if (i.getItemId().equals(itemId)) {
+                    return i;
+                }
             }
         }
         return null;

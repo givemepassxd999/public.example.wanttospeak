@@ -84,7 +84,6 @@ public class MyCombination {
 
         switch(choice.getType()) {
             case Constant.TWO_OPTIONS:
-                Logger.e("two option");
                 getInstance().twoOptionCombinationList.put(personId, mulitipleChoiceList);
                 break;
             case Constant.THREE_OPTIONS:
