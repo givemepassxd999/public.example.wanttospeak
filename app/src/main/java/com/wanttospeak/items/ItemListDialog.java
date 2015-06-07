@@ -72,6 +72,8 @@ public class ItemListDialog extends CommonDialog{
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                new ItemDetailDialog(mContext, i).show();
+                //從清單選取
                 if(mOnChoiceCompleteListener != null){
                     mOnChoiceCompleteListener.onChoiceCompleted(itemList.get(i));
                     dismiss();

@@ -2,7 +2,6 @@ package com.wanttospeak.combination;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.media.MediaPlayer;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,9 +16,7 @@ import com.wanttospeak.dao.MultipleChoiceDao;
 import com.wanttospeak.dialog.CommonDialog;
 import com.wanttospeak.util.Convert;
 import com.wanttospeak.util.ImageHelper;
-import com.wanttospeak.util.Logger;
-
-import java.io.IOException;
+import com.wanttospeak.util.RecorderHelper;
 
 /**
  * Created by givemepass on 2015/6/1.
@@ -51,25 +48,7 @@ public class TwoChoiceDetailDialog extends CommonDialog{
 
 	}
 
-	private void playRecord(String path) {
-		final MediaPlayer mediaPlayer = new MediaPlayer();
-		try {
-			mediaPlayer.setDataSource(path);
-			mediaPlayer.prepare();
-			mediaPlayer.start();
-		} catch (IOException e) {
-			Logger.e(e.getMessage());
-			e.printStackTrace();
-		}
-		mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
 
-			@Override
-			public void onCompletion(MediaPlayer mp) {
-				mediaPlayer.stop();
-				mediaPlayer.release();
-			}
-		});
-	}
 
 	private void initView(){
 		topImg = (ImageView) findViewById(R.id.two_choice_detail_top_img);
@@ -82,14 +61,14 @@ public class TwoChoiceDetailDialog extends CommonDialog{
 		topImg.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				playRecord(topItem.getRecordPath());
+				RecorderHelper.playRecord(topItem.getRecordPath());
 			}
 		});
 
 		bottomImg.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				playRecord(bottomItem.getRecordPath());
+				RecorderHelper.playRecord(bottomItem.getRecordPath());
 			}
 		});
 

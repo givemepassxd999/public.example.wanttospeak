@@ -44,7 +44,7 @@ public class MyCombination {
                 if(multipleChoicesList == null){
                     try {
                         multipleChoicesList = (ArrayList<MultipleChoiceDao>) DatabaseHelper.getInstance().getMultipleChoiceDao().queryForAll();
-                        Logger.e("query success");
+                        Logger.i("query success");
                     } catch (SQLException e) {
                         multipleChoicesList = null;
                         Logger.e("query fail");

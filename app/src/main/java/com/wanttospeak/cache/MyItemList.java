@@ -14,14 +14,11 @@ import java.util.HashMap;
  */
 public class MyItemList {
 
-    private static MyItemList mInstance;
+    private static MyItemList mInstance = new MyItemList();
 
     private HashMap<String, ArrayList<ItemDao>> personalItemList;
 
     public static MyItemList getInstance(){
-        if(null == mInstance){
-            mInstance = new MyItemList();
-        }
         return mInstance;
     }
 
@@ -43,7 +40,18 @@ public class MyItemList {
     }
 
     public static ItemDao getItemObjByPersonIdAndIndex(String personId, int itemListIndex){
-        return getInstance().personalItemList.get(personId).get(itemListIndex);
+        ArrayList<ItemDao> list = getInstance().personalItemList.get(personId);
+        if(list == null){
+            return new ItemDao();
+        } else{
+            ItemDao item = list.get(itemListIndex);
+            if(item == null) {
+                return new ItemDao();
+            } else{
+                return item;
+            }
+        }
+
     }
 
     public static ItemDao getItemObjByPersonIdAndItemId(String personId, String itemId){

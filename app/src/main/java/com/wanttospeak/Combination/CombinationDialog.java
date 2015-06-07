@@ -43,8 +43,12 @@ public class CombinationDialog extends CommonDialog{
         combinationList = MyCombination.getItemsCombinationList(DataHelper.getCurrentPersonId(), type);
 
         mListView = (ListView) findViewById(R.id.combination_list);
-        mCombinationListAdapter = new CombinationListAdapter();
-        mListView.setAdapter(mCombinationListAdapter);
+        switch(type){
+            case Constant.TWO_OPTIONS:
+                mCombinationListAdapter = new CombinationListAdapter();
+                mListView.setAdapter(mCombinationListAdapter);
+            break;
+        }
 
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

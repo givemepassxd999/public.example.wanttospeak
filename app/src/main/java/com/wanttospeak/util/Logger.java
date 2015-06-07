@@ -7,7 +7,17 @@ import android.util.Log;
  */
 public class Logger{
 
+	public final static boolean DEBUG = true;
+
 	public static void e(String msg){
-		Log.e("", msg);
+		if(DEBUG) {
+			Log.e("", msg);
+		}
+	}
+
+	public static void i(String msg){
+		if(DEBUG) {
+			Log.i("", msg);
+		}
 	}
 }

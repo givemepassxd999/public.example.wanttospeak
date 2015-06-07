@@ -25,6 +25,9 @@ public class ItemDao {
 
     public ItemDao() {
         itemId = IdGenerator.createId();
+        itemName = "";
+        photoPath = "";
+        recordPath = "";
     }
 
     public String getItemName() {
