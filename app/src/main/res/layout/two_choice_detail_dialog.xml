@@ -10,6 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="0.5">
         <ImageView
+            android:layout_centerVertical="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/two_choice_detail_top_img"
@@ -19,6 +20,8 @@
             android:id="@+id/two_choice_detail_top_text"
             android:layout_width="wrap_content"
             android:layout_centerHorizontal="true"
+            android:textColor="@color/black"
+            android:textSize="26sp"
             android:layout_height="wrap_content"/>
     </RelativeLayout>
     <RelativeLayout
@@ -26,6 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="0.5">
         <ImageView
+            android:layout_centerVertical="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/two_choice_detail_bottom_img"
@@ -35,6 +39,8 @@
             android:id="@+id/two_choice_detail_bottom_text"
             android:layout_centerHorizontal="true"
             android:layout_width="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="26sp"
             android:layout_height="wrap_content"/>
     </RelativeLayout>
 </LinearLayout>

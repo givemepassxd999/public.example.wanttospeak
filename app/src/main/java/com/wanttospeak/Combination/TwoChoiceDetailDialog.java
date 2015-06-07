@@ -2,6 +2,9 @@ package com.wanttospeak.combination;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.media.MediaPlayer;
+import android.util.DisplayMetrics;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -12,6 +15,9 @@ import com.wanttospeak.dao.ItemDao;
 import com.wanttospeak.dao.MultipleChoiceDao;
 import com.wanttospeak.dialog.CommonDialog;
 import com.wanttospeak.util.ImageHelper;
+import com.wanttospeak.util.Logger;
+
+import java.io.IOException;
 
 /**
  * Created by givemepass on 2015/6/1.
@@ -40,11 +46,45 @@ public class TwoChoiceDetailDialog extends CommonDialog{
 		initView();
 	}
 
+	private void playRecord(String path) {
+		final MediaPlayer mediaPlayer = new MediaPlayer();
+		try {
+			mediaPlayer.setDataSource(path);
+			mediaPlayer.prepare();
+			mediaPlayer.start();
+		} catch (IOException e) {
+			Logger.e(e.getMessage());
+			e.printStackTrace();
+		}
+		mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+
+			@Override
+			public void onCompletion(MediaPlayer mp) {
+				mediaPlayer.stop();
+				mediaPlayer.release();
+			}
+		});
+	}
+
 	private void initView(){
 		topImg = (ImageView) findViewById(R.id.two_choice_detail_top_img);
 		bottomImg = (ImageView) findViewById(R.id.two_choice_detail_bottom_img);
 		topImg.setImageBitmap(topBmp);
 		bottomImg.setImageBitmap(bottomBmp);
+
+		topImg.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				Logger.e(topItem.getRecordPath());
+			}
+		});
+
+		bottomImg.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				playRecord(bottomItem.getRecordPath());
+			}
+		});
 
 		topTextView = (TextView) findViewById(R.id.two_choice_detail_top_text);
 		bottomTextView = (TextView) findViewById(R.id.two_choice_detail_bottom_text);
@@ -59,7 +99,8 @@ public class TwoChoiceDetailDialog extends CommonDialog{
 		topItem = MyItemList.getItemObjByPersonIdAndItemId(currentPersonId, topItemId);
 		bottomItem = MyItemList.getItemObjByPersonIdAndItemId(currentPersonId, bottomItemId);
 
-		topBmp = ImageHelper.resize(topItem.getPhotoPath(), 500, 500);
-		bottomBmp = ImageHelper.resize(bottomItem.getPhotoPath(), 500, 500);
+		DisplayMetrics metrics = mContext.getResources().getDisplayMetrics();
+		topBmp = ImageHelper.resize(topItem.getPhotoPath(), metrics.widthPixels, metrics.heightPixels);
+		bottomBmp = ImageHelper.resize(bottomItem.getPhotoPath(), metrics.widthPixels, metrics.heightPixels);
 	}
 }
