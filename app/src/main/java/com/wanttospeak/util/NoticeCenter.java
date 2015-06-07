@@ -2,6 +2,10 @@ package com.wanttospeak.util;
 
 import android.net.Uri;
 
+import com.wanttospeak.dao.ItemDao;
+
+import java.util.ArrayList;
+
 /**
  * Created by givemepass on 2015/5/24.
  */
@@ -50,19 +54,29 @@ public class NoticeCenter {
         }
     }
 
-    private OnSaveNewItemListener mOnSaveNewItemListener;
+    private static ArrayList<OnSaveNewItemListener> mOnSaveNewItemListenerList = new ArrayList<OnSaveNewItemListener>();
 
     public interface OnSaveNewItemListener{
-        public void notifySaveNewItem();
+        public void notifySaveNewItem(ItemDao item);
     }
 
     public void setOnSaveNewItemListener(OnSaveNewItemListener listener){
-        mOnSaveNewItemListener = listener;
+        if(listener != null) {
+            mOnSaveNewItemListenerList.add(listener);
+        }
     }
 
-    public void notifySaveNewItem(){
-        if(mOnSaveNewItemListener != null){
-            mOnSaveNewItemListener.notifySaveNewItem();
+    public void removeOnSaveNewItemListener(OnSaveNewItemListener listener){
+        if(listener != null){
+            mOnSaveNewItemListenerList.remove(listener);
+        }
+    }
+
+    public void notifySaveNewItemFinished(ItemDao item){
+        for(OnSaveNewItemListener l : mOnSaveNewItemListenerList){
+           if(l != null){
+               l.notifySaveNewItem(item);
+           }
         }
     }
 

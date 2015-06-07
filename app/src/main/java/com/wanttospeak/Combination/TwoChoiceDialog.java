@@ -19,7 +19,10 @@ import com.wanttospeak.dao.DatabaseHelper;
 import com.wanttospeak.dao.ItemDao;
 import com.wanttospeak.dao.MultipleChoiceDao;
 import com.wanttospeak.items.ItemListDialog;
+import com.wanttospeak.items.ItemMakerDialog;
+import com.wanttospeak.main.MainActivity;
 import com.wanttospeak.util.ImageHelper;
+import com.wanttospeak.util.NoticeCenter;
 
 import java.sql.SQLException;
 
@@ -47,6 +50,8 @@ public class TwoChoiceDialog extends CombinationListDialog {
 	private final int LEFT = 0;
 
 	private final int RIGHT = 1;
+
+	private NoticeCenter.OnSaveNewItemListener mOnSaveNewItemListener;
 
 	public TwoChoiceDialog(Context context, int type, String combinationId) {
 		super(context);
@@ -121,35 +126,50 @@ public class TwoChoiceDialog extends CombinationListDialog {
 							mItemListDialog.setOnChoiceCompleteListener(new ItemListDialog.OnChoiceCompleteListener() {
 								@Override
 								public void onChoiceCompleted(ItemDao item) {
-
-								String itemPicPath = item.getPhotoPath();
-								try {
-									Bitmap b = ImageHelper.resize(itemPicPath, 200);
-									switch (position){
-										case LEFT:
-											twoChoice.setArrayData(item.getItemId(), 0);
-											leftItemView.setImageBitmap(b);
-											break;
-										case RIGHT:
-											twoChoice.setArrayData(item.getItemId(), 1);
-											rightItemView.setImageBitmap(b);
-											break;
-									}
-
-								} catch (Exception e) {
-									e.printStackTrace();
-								}
+									setItem(item, position);
 								}
 							});
 							mItemListDialog.show();
 							break;
 						case 1:
-
+							ItemMakerDialog itemMakerDialog = new ItemMakerDialog((MainActivity) mContext);
+							mOnSaveNewItemListener = new NoticeCenter.OnSaveNewItemListener() {
+								@Override
+								public void notifySaveNewItem(ItemDao item) {
+									setItem(item, position);
+								}
+							};
+							NoticeCenter.getInstance().setOnSaveNewItemListener(mOnSaveNewItemListener);
+							itemMakerDialog.show();
 							break;
 					}
 					}});
 			builder.show();
 		}
 	}
+	private void setItem(ItemDao item, int position){
+		String itemPicPath = item.getPhotoPath();
+		try {
+			Bitmap b = ImageHelper.resize(itemPicPath, 200);
+			switch (position){
+				case LEFT:
+					twoChoice.setArrayData(item.getItemId(), 0);
+					leftItemView.setImageBitmap(b);
+					break;
+				case RIGHT:
+					twoChoice.setArrayData(item.getItemId(), 1);
+					rightItemView.setImageBitmap(b);
+					break;
+			}
 
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void dismiss() {
+		NoticeCenter.getInstance().removeOnSaveNewItemListener(mOnSaveNewItemListener);
+		super.dismiss();
+	}
 }

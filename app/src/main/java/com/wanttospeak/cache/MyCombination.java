@@ -36,6 +36,33 @@ public class MyCombination {
         return mInstance;
     }
 
+    public static int getItemsCombinationListSize(String personId, int type){
+        ArrayList<MultipleChoiceDao> multipleChoicesList;
+        switch(type){
+            case Constant.TWO_OPTIONS:
+                multipleChoicesList = getInstance().twoOptionCombinationList.get(personId);
+                if(multipleChoicesList == null){
+                    try {
+                        multipleChoicesList = (ArrayList<MultipleChoiceDao>) DatabaseHelper.getInstance().getMultipleChoiceDao().queryForAll();
+                        Logger.e("query success");
+                    } catch (SQLException e) {
+                        multipleChoicesList = null;
+                        Logger.e("query fail");
+                    }
+                }
+                break;
+            case Constant.THREE_OPTIONS:
+                multipleChoicesList = getInstance().twoOptionCombinationList.get(personId);
+                break;
+            case Constant.FOUR_OPTIONS:
+                multipleChoicesList = getInstance().twoOptionCombinationList.get(personId);
+                break;
+            default:
+                multipleChoicesList = null;
+                break;
+        }
+        return multipleChoicesList.size();
+    }
 
     public static ArrayList<MultipleChoiceDao> getItemsCombinationList(String personId, int type) {
         ArrayList<MultipleChoiceDao> multipleChoicesList;

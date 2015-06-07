@@ -32,6 +32,8 @@ public class ItemListDialog extends CommonDialog{
 
     private OnChoiceCompleteListener mOnChoiceCompleteListener;
 
+    private NoticeCenter.OnSaveNewItemListener mOnSaveNewItemListener;
+
     public interface OnChoiceCompleteListener{
         public void onChoiceCompleted(ItemDao item);
     }
@@ -54,27 +56,34 @@ public class ItemListDialog extends CommonDialog{
         setOnNaviActionClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            ItemMakerDialog itemMakerDialog = new ItemMakerDialog((MainActivity) mContext);
-            itemMakerDialog.show();
+                ItemMakerDialog itemMakerDialog = new ItemMakerDialog((MainActivity) mContext);
+                itemMakerDialog.show();
             }
         });
-        NoticeCenter.getInstance().setOnSaveNewItemListener(new NoticeCenter.OnSaveNewItemListener() {
+        mOnSaveNewItemListener = new NoticeCenter.OnSaveNewItemListener() {
             @Override
-            public void notifySaveNewItem() {
-            itemList = MyItemList.getItemListByPersonId(DataHelper.getCurrentPersonId());
-            mItemListAdapter.notifyDataSetChanged();
+            public void notifySaveNewItem(ItemDao item) {
+                itemList = MyItemList.getItemListByPersonId(DataHelper.getCurrentPersonId());
+                mItemListAdapter.notifyDataSetChanged();
             }
-        });
+        };
+        NoticeCenter.getInstance().setOnSaveNewItemListener(mOnSaveNewItemListener);
 
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-            if(mOnChoiceCompleteListener != null){
-                mOnChoiceCompleteListener.onChoiceCompleted(itemList.get(i));
-                dismiss();
-            }
+                if(mOnChoiceCompleteListener != null){
+                    mOnChoiceCompleteListener.onChoiceCompleted(itemList.get(i));
+                    dismiss();
+                }
             }
         });
+    }
+
+    @Override
+    public void dismiss() {
+        NoticeCenter.getInstance().removeOnSaveNewItemListener(mOnSaveNewItemListener);
+        super.dismiss();
     }
 
     private class ItemListAdapter extends BaseAdapter{

@@ -150,7 +150,7 @@ public class ItemMakerDialog extends CommonDialog {
                         e.printStackTrace();
                     }
 
-                    NoticeCenter.getInstance().notifySaveNewItem();
+                    NoticeCenter.getInstance().notifySaveNewItemFinished(item);
                     Toast.makeText(activity, activity.getString(R.string.add_item_success),
                             Toast.LENGTH_SHORT).show();
                     dismiss();

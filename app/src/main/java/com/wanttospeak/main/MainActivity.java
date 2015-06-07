@@ -18,9 +18,12 @@ import android.widget.TextView;
 
 import com.androidquery.AQuery;
 import com.example.givemepass.wanttospeak.R;
+import com.wanttospeak.cache.MyCombination;
 import com.wanttospeak.combination.CombinationDialog;
 import com.wanttospeak.cache.Constant;
 import com.wanttospeak.cache.DataHelper;
+import com.wanttospeak.combination.CombinationListDialog;
+import com.wanttospeak.combination.TwoChoiceDialog;
 import com.wanttospeak.dao.DatabaseHelper;
 import com.wanttospeak.items.ItemListDialog;
 import com.wanttospeak.items.ItemMakerDialog;
@@ -74,7 +77,19 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 switch (i) {
                     case 0:
-                        new CombinationDialog(mContext, Constant.TWO_OPTIONS).show();
+                        int count = MyCombination.getItemsCombinationListSize(DataHelper.getCurrentPersonId(), Constant.TWO_OPTIONS);
+                        if (count > 0) {
+                            new CombinationDialog(mContext, Constant.TWO_OPTIONS).show();
+                        } else {
+                            TwoChoiceDialog mTwoChoiceDialog = new TwoChoiceDialog(mContext, Constant.TWO_OPTIONS, null);
+                            mTwoChoiceDialog.setOnSaveFinishedListener(new CombinationListDialog.OnSaveFinishedListener() {
+                                @Override
+                                public void OnSaveFinished() {
+                                    new CombinationDialog(mContext, Constant.TWO_OPTIONS).show();
+                                }
+                            });
+                            mTwoChoiceDialog.show();
+                        }
                         break;
                     case 1:
                         new CombinationDialog(mContext, Constant.THREE_OPTIONS).show();
@@ -92,11 +107,9 @@ public class MainActivity extends AppCompatActivity {
         if(resultCode == RESULT_OK) {
             switch (requestCode) {
                 case ItemMakerDialog.REQUEST_TAKE_PHOTO:
-//                    itemMakerDialog.notifiNewPictureReady();
                     NoticeCenter.getInstance().notifyOnNewPictureReady();
                     break;
                 case ItemMakerDialog.RESULT_LOAD_IMAGE:
-//                    itemMakerDialog.notifiGalleryPictureReady(data.getData());
                     NoticeCenter.getInstance().notyfyOnGalleryPictureReady(data.getData());
                     break;
             }
